@@ -17,7 +17,13 @@ public class Controller implements Initializable {
     private Button totalStatisticsUpdateButton;
 
     @FXML
-    private TableView totalStatisticsTable;
+    private TableView<TotalStatistics> totalStatisticsTable;
+
+    @FXML
+    private TableColumn<TotalStatistics, String> tstColumnName;
+
+    @FXML
+    private TableColumn<TotalStatistics, Number> tstColumnQuantity;
 
     @FXML
     private ChoiceBox<String> dailyStatisticsSite;
@@ -35,29 +41,56 @@ public class Controller implements Initializable {
     private Button dailyStatisticsUpdateButton;
 
     @FXML
-    private TableView dailyStatisticsTable;
+    private TableView<DailyStatistics> dailyStatisticsTable;
+
+    @FXML
+    private TableColumn<DailyStatistics, String> dstColumnDate;
+
+    @FXML
+    private TableColumn<DailyStatistics, Number> dstColumnQuantity;
 
     @FXML
     private TextField dailyStatisticsTotalQuantity;
 
 
-    public void pressDailyStatisticsUpdateButton() {
+    public void pressTotalStatisticsUpdateButton() {
         // +++ проверка
-        dailyStatisticsTotalQuantity.setText("Нажали кнопку 'Применить'");
+        ObservableList<TotalStatistics> totalStatisticsList = FXCollections.observableArrayList(
+                new TotalStatistics("Путин",5000),
+                new TotalStatistics("Медведев",4000),
+                new TotalStatistics("Навальный",3000));
+        totalStatisticsTable.setItems(totalStatisticsList);
         // --- проверка
     }
 
+    public void pressDailyStatisticsUpdateButton() {
+        // +++ заполнение тестовых данных
+        ObservableList<DailyStatistics> dailyStatisticsList = FXCollections.observableArrayList(
+                new DailyStatistics("01-12-2017", 50),
+                new DailyStatistics("02-12-2017",40),
+                new DailyStatistics("03-12-2017",30));
+        dailyStatisticsTable.setItems(dailyStatisticsList);
+        // --- заполнение тестовых данных
+    }
+
     public void updateDailyStatisticsBeginDate() {
-        // проверка
+        // +++ заполнение тестовых данных
         LocalDate date = dailyStatisticsBeginDate.getValue();
         dailyStatisticsTotalQuantity.setText("Selected date: " + date);
-        // --- проверка
+        // --- заполнение тестовых данных
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        // заполнение тестовых данных
+        tstColumnName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        tstColumnQuantity.setCellValueFactory(cellData -> cellData.getValue().quantityProperty());
+
+        dstColumnDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        dstColumnQuantity.setCellValueFactory(cellData -> cellData.getValue().quantityProperty());
+
+        // +++ заполнение тестовых данных
         ObservableList<String> sites = FXCollections.observableArrayList(
                 "lenta.ru","rbc.ru","rambler.ru");
         ObservableList<String> names = FXCollections.observableArrayList(
@@ -66,5 +99,8 @@ public class Controller implements Initializable {
         totalStatisticsSite.setItems(sites);
         dailyStatisticsSite.setItems(sites);
         dailyStatisticsName.setItems(names);
+        // --- заполнение тестовых данных
+
+
     }
 }

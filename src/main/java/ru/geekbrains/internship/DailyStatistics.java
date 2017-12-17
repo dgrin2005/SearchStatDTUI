@@ -1,13 +1,24 @@
 package ru.geekbrains.internship;
 
-import java.time.LocalDate;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class DailyStatistics {
-    private LocalDate date;
-    private int quantity;
+    private StringProperty date;
+    private IntegerProperty quantity;
 
-    public DailyStatistics(LocalDate date, int quantity) {
-        this.date = date;
-        this.quantity = quantity;
+    public DailyStatistics(String date, int quantity) {
+        this.date = new SimpleStringProperty(date);
+        this.quantity = new SimpleIntegerProperty(quantity);
+    }
+
+    public StringProperty dateProperty() {
+        return date;
+    }
+
+    public IntegerProperty quantityProperty() {
+        return quantity;
     }
 }
