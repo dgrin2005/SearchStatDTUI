@@ -38,11 +38,11 @@
                   <ChoiceBox fx:id="dailyStatisticsSite" layoutX="79.0" layoutY="10.0" prefWidth="150.0" />
                   <Label layoutX="19.0" layoutY="51.0" text="Имя" />
                   <ChoiceBox fx:id="dailyStatisticsName" layoutX="79.0" layoutY="47.0" prefWidth="150.0" />
-                  <DatePicker fx:id="dailyStatisticsBeginDate" layoutX="79.0" layoutY="87.0" onAction="#dailyStatisticsBeginDateUpdate" prefHeight="25.0" prefWidth="114.0" promptText="Начальная дата" />
+                  <DatePicker fx:id="dailyStatisticsBeginDate" layoutX="79.0" layoutY="87.0" onAction="#updateDailyStatisticsBeginDate" prefHeight="25.0" prefWidth="114.0" promptText="Начальная дата" />
                   <DatePicker fx:id="dailyStatisticsEndDate" layoutX="221.0" layoutY="87.0" prefHeight="25.0" prefWidth="109.0" promptText="Конечная дата" />
                   <Label layoutX="19.0" layoutY="91.0" text="Период с" />
                   <Label layoutX="199.0" layoutY="91.0" text="по" />
-                  <Button fx:id="dailyStatisticsUpdateButton" layoutX="342.0" layoutY="87.0" mnemonicParsing="false" onAction="#dailyStatisticsUpdateButtonPressed" text="Применить" />
+                  <Button fx:id="dailyStatisticsUpdateButton" layoutX="342.0" layoutY="87.0" mnemonicParsing="false" onAction="#pressDailyStatisticsUpdateButton" text="Применить" />
                   <TableView fx:id="dailyStatisticsTable" layoutX="19.0" layoutY="119.0" prefHeight="237.0" prefWidth="400.0">
                     <columns>
                       <TableColumn prefWidth="137.0" text="Дата" />

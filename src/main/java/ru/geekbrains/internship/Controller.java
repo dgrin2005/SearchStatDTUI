@@ -41,13 +41,13 @@ public class Controller implements Initializable {
     private TextField dailyStatisticsTotalQuantity;
 
 
-    public void dailyStatisticsUpdateButtonPressed() {
+    public void pressDailyStatisticsUpdateButton() {
         // +++ проверка
         dailyStatisticsTotalQuantity.setText("Нажали кнопку 'Применить'");
         // --- проверка
     }
 
-    public void dailyStatisticsBeginDateUpdate() {
+    public void updateDailyStatisticsBeginDate() {
         // проверка
         LocalDate date = dailyStatisticsBeginDate.getValue();
         dailyStatisticsTotalQuantity.setText("Selected date: " + date);
