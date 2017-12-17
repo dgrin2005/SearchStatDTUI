@@ -54,13 +54,13 @@ public class Controller implements Initializable {
 
 
     public void pressTotalStatisticsUpdateButton() {
-        // +++ проверка
+        // +++ заполнение тестовых данных
         ObservableList<TotalStatistics> totalStatisticsList = FXCollections.observableArrayList(
                 new TotalStatistics("Путин",5000),
                 new TotalStatistics("Медведев",4000),
                 new TotalStatistics("Навальный",3000));
         totalStatisticsTable.setItems(totalStatisticsList);
-        // --- проверка
+        // --- заполнение тестовых данных
     }
 
     public void pressDailyStatisticsUpdateButton() {
@@ -74,10 +74,10 @@ public class Controller implements Initializable {
     }
 
     public void updateDailyStatisticsBeginDate() {
-        // +++ заполнение тестовых данных
+        // +++ проверка
         LocalDate date = dailyStatisticsBeginDate.getValue();
         dailyStatisticsTotalQuantity.setText("Selected date: " + date);
-        // --- заполнение тестовых данных
+        // --- проверка
     }
 
 
