@@ -49,11 +49,13 @@ public class ControllerUI implements Initializable {
     }
 
     public void pressTotalStatisticsUpdateButton() {
-        totalStatisticsTable.setItems(connDB.getTotalStatisticsList());
+        totalStatisticsTable.setItems(connDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
     }
 
     public void pressDailyStatisticsUpdateButton() {
-        dailyStatisticsTable.setItems(connDB.getDailyStatisticsList());
+        dailyStatisticsTable.setItems(
+                connDB.getDailyStatisticsList(
+                        dailyStatisticsSite.getValue(), dailyStatisticsName.getValue()));
     }
 
     public void updateDailyStatisticsBeginDate() {

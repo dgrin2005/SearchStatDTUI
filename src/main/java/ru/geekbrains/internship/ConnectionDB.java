@@ -9,7 +9,7 @@ public class ConnectionDB {
         return true;
     }
 
-    public ObservableList getTotalStatisticsList() {
+    public ObservableList getTotalStatisticsList(String site) {
         ObservableList<TotalStatistics> totalStatisticsList = FXCollections.observableArrayList(
                 new TotalStatistics("Путин",5000),
                 new TotalStatistics("Медведев",4000),
@@ -17,7 +17,7 @@ public class ConnectionDB {
         return totalStatisticsList;
     }
 
-    public ObservableList getDailyStatisticsList() {
+    public ObservableList getDailyStatisticsList(String site, String name) {
         ObservableList<DailyStatistics> dailyStatisticsList = FXCollections.observableArrayList(
                 new DailyStatistics("01-12-2017", 50),
                 new DailyStatistics("02-12-2017",40),
