@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.geekbrains.internship.ControllerAuth">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.geekbrains.internship.ControllerAuth">
    <children>
       <GridPane layoutX="21.0" layoutY="21.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -30,8 +30,8 @@
             <ButtonBar prefHeight="40.0" prefWidth="227.0" />
             <Label text="Логин" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Пароль" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <PasswordField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <PasswordField fx:id="password" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="login" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button fx:id="okButton" mnemonicParsing="false" onAction="#pressOkButton" prefHeight="25.0" prefWidth="119.0" text="ОК" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#pressCancelButton" prefHeight="25.0" prefWidth="122.0" text="Отмена" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>

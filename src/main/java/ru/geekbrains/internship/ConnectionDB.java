@@ -11,7 +11,7 @@ public class ConnectionDB {
     private ObservableList<String> sites;
     private ObservableList<String> names;
 
-    public boolean checkAuthorization() {
+    public boolean checkAuthorization(String login, String password) {
         return true;
     }
 
