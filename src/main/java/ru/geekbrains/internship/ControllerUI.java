@@ -1,9 +1,14 @@
 package ru.geekbrains.internship;
 
 import javafx.fxml.*;
+import javafx.geometry.Side;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ControllerUI implements Initializable {
@@ -39,6 +44,10 @@ public class ControllerUI implements Initializable {
     private TableColumn<DailyStatistics, Number> dstColumnQuantity;
     @FXML
     private TextField dailyStatisticsTotalQuantity;
+    @FXML
+    private PieChart totalStatisticsChart;
+    @FXML
+    private LineChart<String, Number> dailyStatisticsChart;
 
     public void setMainApp(StartWindow mainApp) {
         this.mainApp = mainApp;
@@ -50,6 +59,9 @@ public class ControllerUI implements Initializable {
 
     public void pressTotalStatisticsUpdateButton() throws Exception {
         totalStatisticsTable.setItems(connDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
+        totalStatisticsChart.setData(connDB.getTotalStatisticsChartData());
+        totalStatisticsChart.setLabelLineLength(10);
+        totalStatisticsChart.setLegendSide(Side.LEFT);
     }
 
     public void pressDailyStatisticsUpdateButton() throws Exception {
@@ -58,6 +70,8 @@ public class ControllerUI implements Initializable {
                         dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
                         dailyStatisticsBeginDate.getValue(), dailyStatisticsEndDate.getValue()));
         dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
+        dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData());
+        dailyStatisticsChart.setTitle("");
     }
 
     @Override

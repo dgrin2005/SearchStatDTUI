@@ -2,8 +2,11 @@ package ru.geekbrains.internship;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ConnectionDB {
 
@@ -24,20 +27,41 @@ public class ConnectionDB {
         return totalStatisticsList;
     }
 
+    public ObservableList getTotalStatisticsChartData() throws  Exception {
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (TotalStatistics ts: totalStatisticsList) {
+            pieChartData.add(new PieChart.Data(ts.nameProperty().getValue().toString(),ts.quantityProperty().intValue()));
+        }
+        return pieChartData;
+    }
+
     public ObservableList getDailyStatisticsList(String site, String name, LocalDate beginDate, LocalDate endDate) throws Exception {
         dailyStatisticsList = FXCollections.observableArrayList(
-                new DailyStatistics("01-12-2017", 50),
-                new DailyStatistics("02-12-2017",40),
-                new DailyStatistics("03-12-2017",30));
+                new DailyStatistics("01/12/2017", 50),
+                new DailyStatistics("02/12/2017",40),
+                new DailyStatistics("03/12/2017",30),
+                new DailyStatistics("04/12/2017",40),
+                new DailyStatistics("05/12/2017",60),
+                new DailyStatistics("06/12/2017",10),
+                new DailyStatistics("07/12/2017",20));
+
         return dailyStatisticsList;
     }
 
     public int getDailyStatisticsTotal() throws Exception {
         int totalPages = 0;
         for (DailyStatistics ds: dailyStatisticsList) {
-            totalPages += ds.quantityProperty().getValue().intValue();
+            totalPages += ds.quantityProperty().intValue();
         }
         return totalPages;
+    }
+
+    public XYChart.Series getDailyStatisticsChartData() throws Exception {
+        XYChart.Series series = new XYChart.Series();
+        for (DailyStatistics ds: dailyStatisticsList) {
+            series.getData().add(new XYChart.Data(ds.dateProperty().getValue(), ds.quantityProperty().intValue()));
+        }
+        return series;
     }
 
     public ObservableList getSites() throws Exception {
