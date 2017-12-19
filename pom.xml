@@ -34,7 +34,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.geekbrains.internship.SearchStatDTUI</mainClass>
+                            <mainClass>ru.geekbrains.internship.StartWindow</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -59,7 +59,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>ru.geekbrains.internship.SearchStatDTUI</mainClass>
+                            <mainClass>ru.geekbrains.internship.StartWindow</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
