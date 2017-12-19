@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SearchStatDTUI extends Application {
+public class StartWindow extends Application {
 
     public Stage getStage() {
         return stage;
