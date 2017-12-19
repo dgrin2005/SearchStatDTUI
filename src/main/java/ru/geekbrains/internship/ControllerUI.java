@@ -48,18 +48,16 @@ public class ControllerUI implements Initializable {
         this.connDB = connDB;
     }
 
-    public void pressTotalStatisticsUpdateButton() {
+    public void pressTotalStatisticsUpdateButton() throws Exception {
         totalStatisticsTable.setItems(connDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
     }
 
-    public void pressDailyStatisticsUpdateButton() {
+    public void pressDailyStatisticsUpdateButton() throws Exception {
         dailyStatisticsTable.setItems(
                 connDB.getDailyStatisticsList(
-                        dailyStatisticsSite.getValue(), dailyStatisticsName.getValue()));
+                        dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
+                        dailyStatisticsBeginDate.getValue(), dailyStatisticsEndDate.getValue()));
         dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
-    }
-
-    public void updateDailyStatisticsBeginDate() {
     }
 
     @Override
@@ -70,7 +68,7 @@ public class ControllerUI implements Initializable {
         dstColumnQuantity.setCellValueFactory(cellData -> cellData.getValue().quantityProperty());
     }
 
-    public void fillLists() {
+    public void fillLists() throws Exception {
         totalStatisticsSite.setItems(connDB.getSites());
         dailyStatisticsSite.setItems(connDB.getSites());
         dailyStatisticsName.setItems(connDB.getNames());

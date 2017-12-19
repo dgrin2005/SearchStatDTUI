@@ -1,8 +1,9 @@
 package ru.geekbrains.internship;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.time.LocalDate;
 
 public class ConnectionDB {
 
@@ -11,11 +12,11 @@ public class ConnectionDB {
     private ObservableList<String> sites;
     private ObservableList<String> names;
 
-    public boolean checkAuthorization(String login, String password) {
+    public boolean checkAuthorization(String login, String password) throws Exception {
         return true;
     }
 
-    public ObservableList getTotalStatisticsList(String site) {
+    public ObservableList getTotalStatisticsList(String site) throws Exception {
         totalStatisticsList = FXCollections.observableArrayList(
                 new TotalStatistics("Путин",5000),
                 new TotalStatistics("Медведев",4000),
@@ -23,7 +24,7 @@ public class ConnectionDB {
         return totalStatisticsList;
     }
 
-    public ObservableList getDailyStatisticsList(String site, String name) {
+    public ObservableList getDailyStatisticsList(String site, String name, LocalDate beginDate, LocalDate endDate) throws Exception {
         dailyStatisticsList = FXCollections.observableArrayList(
                 new DailyStatistics("01-12-2017", 50),
                 new DailyStatistics("02-12-2017",40),
@@ -31,7 +32,7 @@ public class ConnectionDB {
         return dailyStatisticsList;
     }
 
-    public int getDailyStatisticsTotal() {
+    public int getDailyStatisticsTotal() throws Exception {
         int totalPages = 0;
         for (DailyStatistics ds: dailyStatisticsList) {
             totalPages += ds.quantityProperty().getValue().intValue();
@@ -39,12 +40,12 @@ public class ConnectionDB {
         return totalPages;
     }
 
-    public ObservableList getSites() {
+    public ObservableList getSites() throws Exception {
         sites = FXCollections.observableArrayList(
                 "lenta.ru","rbc.ru","rambler.ru");
         return sites;
     }
-    public ObservableList getNames() {
+    public ObservableList getNames() throws Exception {
         names = FXCollections.observableArrayList(
                 "Путин","Медведев","Навальный");
         return names;

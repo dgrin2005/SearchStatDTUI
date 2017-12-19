@@ -21,24 +21,14 @@ public class ControllerAuth {
         this.connDB = connDB;
     }
 
-    public void pressOkButton() {
-        try {
-            if (connDB.checkAuthorization(login.getText(), password.getText())) {
-                new DesktopUI(mainApp, connDB);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+    public void pressOkButton() throws Exception {
+        if (connDB.checkAuthorization(login.getText(), password.getText())) {
+            new DesktopUI(mainApp, connDB);
         }
     }
 
-    public void pressCancelButton() {
-        try {
-            System.exit(0);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void pressCancelButton() throws Exception{
+        mainApp.paint(mainApp.getStage(), connDB);
     }
 
 }

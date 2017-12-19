@@ -13,12 +13,8 @@ public class ControllerStart {
         this.connDB = connDB;
     }
 
-    public void pressStartButton() {
-        try {
-            new AuthorizationWindow(mainApp, connDB);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void pressStartButton() throws Exception {
+        new AuthorizationWindow(mainApp, connDB);
     }
+
 }
