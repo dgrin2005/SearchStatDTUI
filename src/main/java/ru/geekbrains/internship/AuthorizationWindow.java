@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 public class AuthorizationWindow {
 
     public AuthorizationWindow(StartWindow mainApp, ConnectionDB connDB) throws Exception {
-
         FXMLLoader loader = new FXMLLoader(mainApp.getClass().getResource("/authwin.fxml"));
         AnchorPane load = (AnchorPane) loader.load();
         ControllerAuth controller = loader.getController();
@@ -19,6 +18,6 @@ public class AuthorizationWindow {
         Scene scene = new Scene(load);
         stage.setScene(scene);
         stage.show();
-
     }
+
 }
