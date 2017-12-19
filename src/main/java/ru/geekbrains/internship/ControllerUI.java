@@ -56,6 +56,7 @@ public class ControllerUI implements Initializable {
         dailyStatisticsTable.setItems(
                 connDB.getDailyStatisticsList(
                         dailyStatisticsSite.getValue(), dailyStatisticsName.getValue()));
+        dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
     }
 
     public void updateDailyStatisticsBeginDate() {
