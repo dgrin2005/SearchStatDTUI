@@ -31,4 +31,8 @@ public class ControllerAuth {
         mainApp.paint(mainApp.getStage(), connDB);
     }
 
+    public void pressRestorePasswordButton() throws Exception{
+
+    }
+
 }
