@@ -6,7 +6,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ConnectionDB {
 

@@ -58,20 +58,29 @@ public class ControllerUI implements Initializable {
     }
 
     public void pressTotalStatisticsUpdateButton() throws Exception {
-        totalStatisticsTable.setItems(connDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
-        totalStatisticsChart.setData(connDB.getTotalStatisticsChartData());
-        totalStatisticsChart.setLabelLineLength(10);
-        totalStatisticsChart.setLegendSide(Side.LEFT);
+        if (totalStatisticsSite.getValue() != null) {
+            totalStatisticsTable.setItems(connDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
+            totalStatisticsChart.setData(connDB.getTotalStatisticsChartData());
+            totalStatisticsChart.setLabelLineLength(10);
+            totalStatisticsChart.setLegendSide(Side.LEFT);
+        }
     }
 
     public void pressDailyStatisticsUpdateButton() throws Exception {
-        dailyStatisticsTable.setItems(
-                connDB.getDailyStatisticsList(
-                        dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
-                        dailyStatisticsBeginDate.getValue(), dailyStatisticsEndDate.getValue()));
-        dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
-        dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData());
-        dailyStatisticsChart.setTitle("");
+        LocalDate beginDate = dailyStatisticsBeginDate.getValue();
+        LocalDate endDate = dailyStatisticsEndDate.getValue();
+        if (!(dailyStatisticsSite.getValue() == null || dailyStatisticsName.getValue() == null ||
+                beginDate == null || endDate == null)) {
+            if (endDate.compareTo(beginDate) >= 0) {
+                dailyStatisticsTable.setItems(
+                        connDB.getDailyStatisticsList(
+                                dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
+                                beginDate, endDate));
+                dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
+                dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData());
+                dailyStatisticsChart.setTitle("");
+            }
+        }
     }
 
     @Override
