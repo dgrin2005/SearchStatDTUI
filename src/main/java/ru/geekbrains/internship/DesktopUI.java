@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class DesktopUI{
 
-    public DesktopUI(StartWindow mainApp, ConnectionDB connDB) throws Exception {
+    public DesktopUI(StartWindow mainApp, RequestDB connDB) throws Exception {
         FXMLLoader loader = new FXMLLoader(mainApp.getClass().getResource("/searchstat.fxml"));
         AnchorPane load = (AnchorPane) loader.load();
         ControllerUI controller = loader.getController();

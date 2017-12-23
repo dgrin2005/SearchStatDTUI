@@ -22,7 +22,7 @@ public class StartWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         try {
-            ConnectionDB connDB = new ConnectionDB();
+            RequestDB connDB = new RequestDB();
             setStage(primaryStage);
             paint(primaryStage, connDB);
         } catch (IOException e) {
@@ -34,7 +34,7 @@ public class StartWindow extends Application {
         launch(args);
     }
 
-    public void paint(Stage stage, ConnectionDB connDB) throws IOException {
+    public void paint(Stage stage, RequestDB connDB) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/startwin.fxml"));
         AnchorPane load = (AnchorPane) loader.load();
         ControllerStart controller = loader.getController();

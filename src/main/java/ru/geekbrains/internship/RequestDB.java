@@ -1,5 +1,9 @@
 package ru.geekbrains.internship;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -7,7 +11,7 @@ import javafx.scene.chart.XYChart;
 
 import java.time.LocalDate;
 
-public class ConnectionDB {
+public class RequestDB {
 
     private ObservableList<TotalStatistics> totalStatisticsList;
     private ObservableList<DailyStatistics> dailyStatisticsList;
@@ -19,10 +23,42 @@ public class ConnectionDB {
     }
 
     public ObservableList getTotalStatisticsList(String site) throws Exception {
+
         totalStatisticsList = FXCollections.observableArrayList(
                 new TotalStatistics("Путин",5000),
                 new TotalStatistics("Медведев",4000),
                 new TotalStatistics("Навальный",3000));
+
+        // +++ тест чтения и репарсинга json
+        ConnectionDB connectionDB = new ConnectionDB();
+        String out = connectionDB.readDBResult();
+
+        JsonParser parser = new JsonParser();
+        JsonElement jsonElement = parser.parse(out);
+
+        JsonObject rootObject = jsonElement.getAsJsonObject();
+        JsonArray sitesArray = (JsonArray) rootObject.get("sites");
+        for (int i = 0; i < sitesArray.size(); i++) {
+            JsonObject siteJSON = (JsonObject) sitesArray.get(i);
+            String stringSiteID = siteJSON.get("SiteID").getAsString();
+            String stringSiteName = siteJSON.get("SiteName").getAsString();
+            System.out.println("SiteID = "+ stringSiteID + " SiteName = " + stringSiteName);
+            JsonArray personArray = (JsonArray) siteJSON.get("persons");
+            for (int j = 0; j < personArray.size(); j++) {
+                JsonObject personJSON = (JsonObject) personArray.get(j);
+                String stringPersonID = personJSON.get("PersonID").getAsString();
+                String stringPersonName = personJSON.get("PersonName").getAsString();
+                String stringPersonRank = personJSON.get("PersonRank").getAsString();
+                System.out.println("\t"+"PersonID = "+ stringPersonID + " PersonName = " + stringPersonName +
+                        " PersonRank = " + stringPersonRank);
+                totalStatisticsList.add(new TotalStatistics(stringPersonName, Integer.parseInt(stringPersonRank)));
+            }
+        }
+
+        connectionDB.closeConnectionDB();
+        // --- тест чтения и репарсинга json
+
+
         return totalStatisticsList;
     }
 
