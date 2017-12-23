@@ -1,4 +1,4 @@
 package ru.geekbrains.internship;
 
-public class ConnectionDB {
+public interface ConnectionDBConst {
 }
