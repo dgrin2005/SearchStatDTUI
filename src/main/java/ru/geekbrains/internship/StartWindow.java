@@ -42,6 +42,7 @@ public class StartWindow extends Application {
         controller.setDBApp(connDB);
         Scene scene = new Scene(load);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("SearchStat");
         stage.show();
     }

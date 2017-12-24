@@ -16,6 +16,7 @@ public class AuthorizationWindow {
         Stage stage = mainApp.getStage();
         stage.setTitle("Authorization");
         Scene scene = new Scene(load);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

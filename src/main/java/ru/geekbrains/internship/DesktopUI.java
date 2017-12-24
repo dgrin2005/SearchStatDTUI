@@ -18,6 +18,7 @@ public class DesktopUI{
         stage.setTitle("SearchStat");
         Scene scene = new Scene(load);
         stage.setScene(scene);
+        stage.setResizable(true);
         stage.show();
     }
 }
