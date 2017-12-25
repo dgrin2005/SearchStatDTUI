@@ -76,7 +76,7 @@ public class ControllerUI implements Initializable {
                                 dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
                                 beginDate, endDate));
                 dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
-                dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData());
+                dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData(dailyStatisticsName.getValue()));
                 dailyStatisticsChart.setTitle("");
             }
         }

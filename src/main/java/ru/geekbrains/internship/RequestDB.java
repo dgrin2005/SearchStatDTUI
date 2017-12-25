@@ -24,10 +24,12 @@ public class RequestDB {
 
     public ObservableList getTotalStatisticsList(String site) throws Exception {
 
-        totalStatisticsList = FXCollections.observableArrayList(
-                new TotalStatistics("Путин",5000),
-                new TotalStatistics("Медведев",4000),
-                new TotalStatistics("Навальный",3000));
+        totalStatisticsList = FXCollections.observableArrayList();
+/*
+        totalStatisticsList.add(new TotalStatistics("Путин",5000));
+        totalStatisticsList.add(new TotalStatistics("Медведев",4000));
+        totalStatisticsList.add(new TotalStatistics("Навальный",3000));
+*/
 
         // +++ тест чтения и репарсинга json
         ConnectionDB connectionDB = new ConnectionDB();
@@ -44,14 +46,10 @@ public class RequestDB {
             String stringSiteName = siteJSON.get("SiteName").getAsString();
             System.out.println("SiteID = "+ stringSiteID + " SiteName = " + stringSiteName);
             JsonArray personArray = (JsonArray) siteJSON.get("persons");
+            TotalStatisticsJSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
             for (int j = 0; j < personArray.size(); j++) {
                 JsonObject personJSON = (JsonObject) personArray.get(j);
-                String stringPersonID = personJSON.get("PersonID").getAsString();
-                String stringPersonName = personJSON.get("PersonName").getAsString();
-                String stringPersonRank = personJSON.get("PersonRank").getAsString();
-                System.out.println("\t"+"PersonID = "+ stringPersonID + " PersonName = " + stringPersonName +
-                        " PersonRank = " + stringPersonRank);
-                totalStatisticsList.add(new TotalStatistics(stringPersonName, Integer.parseInt(stringPersonRank)));
+                totalStatisticsList.add((TotalStatistics) tsJSONReparsing.readJSONObject(personJSON));
             }
         }
 
@@ -91,8 +89,9 @@ public class RequestDB {
         return totalPages;
     }
 
-    public XYChart.Series getDailyStatisticsChartData() throws Exception {
+    public XYChart.Series getDailyStatisticsChartData(String name) throws Exception {
         XYChart.Series series = new XYChart.Series();
+        series.setName(name);
         for (DailyStatistics ds: dailyStatisticsList) {
             series.getData().add(new XYChart.Data(ds.dateProperty().getValue(), ds.quantityProperty().intValue()));
         }
