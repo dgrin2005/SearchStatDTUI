@@ -10,13 +10,12 @@ import java.io.IOException;
 
 public class DesktopUI{
 
-    public DesktopUI(StartWindow mainApp, RequestDB requestDB) {
+    public DesktopUI(StartWindow mainApp) {
         try {
             FXMLLoader loader = new FXMLLoader(mainApp.getClass().getResource("/searchstat.fxml"));
             AnchorPane load = (AnchorPane) loader.load();
             ControllerUI controller = loader.getController();
             controller.setMainApp(mainApp);
-            controller.setDBApp(requestDB);
             controller.fillLists();
             Stage stage = mainApp.getStage();
             stage.setTitle("SearchStat");

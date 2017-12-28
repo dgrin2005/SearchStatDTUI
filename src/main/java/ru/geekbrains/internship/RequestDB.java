@@ -22,7 +22,7 @@ public class RequestDB {
         return true;
     }
 
-    public ObservableList getTotalStatisticsList(String site) {
+    public ObservableList getTotalStatisticsList(ConnectionDB connectionDB, String site) {
 
         totalStatisticsList = FXCollections.observableArrayList();
 /*
@@ -33,7 +33,7 @@ public class RequestDB {
 
         // +++ тест чтения и репарсинга json
         try {
-            ConnectionDB connectionDB = new ConnectionDB();
+            //ConnectionDB connectionDB = new ConnectionDB();
             String out = connectionDB.readDBResult();
 
             JsonParser parser = new JsonParser();
@@ -72,7 +72,7 @@ public class RequestDB {
         return pieChartData;
     }
 
-    public ObservableList getDailyStatisticsList(String site, String name, LocalDate beginDate, LocalDate endDate) {
+    public ObservableList getDailyStatisticsList(ConnectionDB connectionDB, String site, String name, LocalDate beginDate, LocalDate endDate) {
         dailyStatisticsList = FXCollections.observableArrayList(
                 new DailyStatistics("01/12/2017", 50),
                 new DailyStatistics("02/12/2017",40),
@@ -102,13 +102,13 @@ public class RequestDB {
         return series;
     }
 
-    public ObservableList getSites() {
+    public ObservableList getSites(ConnectionDB connectionDB) {
         sites = FXCollections.observableArrayList(
                 "lenta.ru","rbc.ru","rambler.ru");
         return sites;
     }
 
-    public ObservableList getNames() {
+    public ObservableList getNames(ConnectionDB connectionDB) {
         names = FXCollections.observableArrayList(
                 "Путин","Медведев","Навальный");
         return names;

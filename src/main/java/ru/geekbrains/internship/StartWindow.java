@@ -11,6 +11,8 @@ import java.io.IOException;
 public class StartWindow extends Application {
 
     private Stage stage;
+    private ConnectionDB connDB;
+    private RequestDB requestDB;
 
     public Stage getStage() {
         return stage;
@@ -20,11 +22,26 @@ public class StartWindow extends Application {
         this.stage = stage;
     }
 
+    public ConnectionDB getConnDB() {
+        return connDB;
+    }
+
+    public void setConnDB(ConnectionDB connDB) {
+        this.connDB = connDB;
+    }
+
+    public RequestDB getRequestDB() {
+        return requestDB;
+    }
+
+    public void setRequestDB(RequestDB requestDB) {
+        this.requestDB = requestDB;
+    }
+
     @Override
     public void start(Stage primaryStage){
-        RequestDB requestDB = new RequestDB();
         setStage(primaryStage);
-        paint(primaryStage, requestDB);
+        paint(primaryStage);
 
     }
 
@@ -32,13 +49,12 @@ public class StartWindow extends Application {
         launch(args);
     }
 
-    public void paint(Stage stage, RequestDB requestDB) {
+    public void paint(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/startwin.fxml"));
             AnchorPane load = (AnchorPane) loader.load();
             ControllerStart controller = loader.getController();
             controller.setMainApp(this);
-            controller.setDBApp(requestDB);
             Scene scene = new Scene(load);
             stage.setScene(scene);
             stage.setResizable(false);

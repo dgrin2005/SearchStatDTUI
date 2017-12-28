@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 public class ControllerAuth {
 
     private StartWindow mainApp;
-    private RequestDB requestDB;
 
     @FXML
     private TextField login;
@@ -17,18 +16,14 @@ public class ControllerAuth {
         this.mainApp = mainApp;
     }
 
-    public void setDBApp(RequestDB requestDB) {
-        this.requestDB = requestDB;
-    }
-
     public void pressOkButton() {
-        if (requestDB.checkAuthorization(login.getText(), password.getText())) {
-            new DesktopUI(mainApp, requestDB);
+        if (mainApp.getRequestDB().checkAuthorization(login.getText(), password.getText())) {
+            new DesktopUI(mainApp);
         }
     }
 
     public void pressCancelButton() {
-        mainApp.paint(mainApp.getStage(), requestDB);
+        mainApp.paint(mainApp.getStage());
     }
 
     public void pressRestorePasswordButton() {

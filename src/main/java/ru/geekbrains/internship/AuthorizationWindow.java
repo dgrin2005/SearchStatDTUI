@@ -10,13 +10,12 @@ import java.io.IOException;
 
 public class AuthorizationWindow {
 
-    public AuthorizationWindow(StartWindow mainApp, RequestDB requestDB) {
+    public AuthorizationWindow(StartWindow mainApp) {
         try {
             FXMLLoader loader = new FXMLLoader(mainApp.getClass().getResource("/authwin.fxml"));
             AnchorPane load = (AnchorPane) loader.load();
             ControllerAuth controller = loader.getController();
             controller.setMainApp(mainApp);
-            controller.setDBApp(requestDB);
             Stage stage = mainApp.getStage();
             stage.setTitle("Authorization");
             Scene scene = new Scene(load);
