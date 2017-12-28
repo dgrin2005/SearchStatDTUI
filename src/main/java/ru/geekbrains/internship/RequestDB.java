@@ -59,8 +59,6 @@ public class RequestDB {
             //e.printStackTrace();
         }
         // --- тест чтения и репарсинга json
-
-
         return totalStatisticsList;
     }
 
@@ -73,16 +71,15 @@ public class RequestDB {
     }
 
     public ObservableList getDailyStatisticsList(ConnectionDB connectionDB, String site, String name, LocalDate beginDate, LocalDate endDate) {
-        dailyStatisticsList = FXCollections.observableArrayList(
-                new DailyStatistics("01/12/2017", 50),
-                new DailyStatistics("02/12/2017",40),
-                new DailyStatistics("03/12/2017",30),
-                new DailyStatistics("04/12/2017",40),
-                new DailyStatistics("05/12/2017",60),
-                new DailyStatistics("06/12/2017",10),
-                new DailyStatistics("07/12/2017",20));
-
-        return dailyStatisticsList;
+        dailyStatisticsList = FXCollections.observableArrayList();
+        // +++ тестовые данные
+        LocalDate d = beginDate;
+        while (!d.isAfter(endDate)) {
+            dailyStatisticsList.add(new DailyStatistics(String.valueOf(d), d.getDayOfMonth() * 11 % 50));
+            d = d.plusDays(1);
+        }
+        // --- тестовые данные
+       return dailyStatisticsList;
     }
 
     public int getDailyStatisticsTotal() {
@@ -103,14 +100,20 @@ public class RequestDB {
     }
 
     public ObservableList getSites(ConnectionDB connectionDB) {
-        sites = FXCollections.observableArrayList(
-                "lenta.ru","rbc.ru","rambler.ru");
+        sites = FXCollections.observableArrayList();
+        // +++ тестовые данные
+        sites.add("lenta.ru");
+        sites.add("rbc.ru");
+        sites.add("rambler.ru");
+        // --- тестовые данные
         return sites;
     }
 
     public ObservableList getNames(ConnectionDB connectionDB) {
-        names = FXCollections.observableArrayList(
-                "Путин","Медведев","Навальный");
+        names = FXCollections.observableArrayList();
+        names.add("Person #1");
+        names.add("Person #2");
+        names.add("Person #3");
         return names;
     }
 

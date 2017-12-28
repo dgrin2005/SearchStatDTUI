@@ -1,7 +1,6 @@
 package ru.geekbrains.internship;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 
 public class AlertHandler {
