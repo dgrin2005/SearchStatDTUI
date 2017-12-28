@@ -8,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-
+import javafx.scene.control.Alert;
 import java.time.LocalDate;
 
 public class RequestDB {
@@ -18,11 +18,11 @@ public class RequestDB {
     private ObservableList<String> sites;
     private ObservableList<String> names;
 
-    public boolean checkAuthorization(String login, String password) throws Exception {
+    public boolean checkAuthorization(String login, String password) {
         return true;
     }
 
-    public ObservableList getTotalStatisticsList(String site) throws Exception {
+    public ObservableList getTotalStatisticsList(String site) {
 
         totalStatisticsList = FXCollections.observableArrayList();
 /*
@@ -32,35 +32,39 @@ public class RequestDB {
 */
 
         // +++ тест чтения и репарсинга json
-        ConnectionDB connectionDB = new ConnectionDB();
-        String out = connectionDB.readDBResult();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            String out = connectionDB.readDBResult();
 
-        JsonParser parser = new JsonParser();
-        JsonElement jsonElement = parser.parse(out);
+            JsonParser parser = new JsonParser();
+            JsonElement jsonElement = parser.parse(out);
 
-        JsonObject rootObject = jsonElement.getAsJsonObject();
-        JsonArray sitesArray = (JsonArray) rootObject.get("sites");
-        for (int i = 0; i < sitesArray.size(); i++) {
-            JsonObject siteJSON = (JsonObject) sitesArray.get(i);
-            String stringSiteID = siteJSON.get("SiteID").getAsString();
-            String stringSiteName = siteJSON.get("SiteName").getAsString();
-            System.out.println("SiteID = "+ stringSiteID + " SiteName = " + stringSiteName);
-            JsonArray personArray = (JsonArray) siteJSON.get("persons");
-            TotalStatisticsJSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
-            for (int j = 0; j < personArray.size(); j++) {
-                JsonObject personJSON = (JsonObject) personArray.get(j);
-                totalStatisticsList.add((TotalStatistics) tsJSONReparsing.readJSONObject(personJSON));
+            JsonObject rootObject = jsonElement.getAsJsonObject();
+            JsonArray sitesArray = (JsonArray) rootObject.get("sites");
+            for (int i = 0; i < sitesArray.size(); i++) {
+                JsonObject siteJSON = (JsonObject) sitesArray.get(i);
+                String stringSiteID = siteJSON.get("SiteID").getAsString();
+                String stringSiteName = siteJSON.get("SiteName").getAsString();
+                System.out.println("SiteID = " + stringSiteID + " SiteName = " + stringSiteName);
+                JsonArray personArray = (JsonArray) siteJSON.get("persons");
+                TotalStatisticsJSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
+                for (int j = 0; j < personArray.size(); j++) {
+                    JsonObject personJSON = (JsonObject) personArray.get(j);
+                    totalStatisticsList.add((TotalStatistics) tsJSONReparsing.readJSONObject(personJSON));
+                }
             }
+            connectionDB.closeConnectionDB();
+        } catch (Exception e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка подключения к базе данных");
+            //e.printStackTrace();
         }
-
-        connectionDB.closeConnectionDB();
         // --- тест чтения и репарсинга json
 
 
         return totalStatisticsList;
     }
 
-    public ObservableList getTotalStatisticsChartData() throws  Exception {
+    public ObservableList getTotalStatisticsChartData() {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (TotalStatistics ts: totalStatisticsList) {
             pieChartData.add(new PieChart.Data(ts.nameProperty().getValue().toString(),ts.quantityProperty().intValue()));
@@ -68,7 +72,7 @@ public class RequestDB {
         return pieChartData;
     }
 
-    public ObservableList getDailyStatisticsList(String site, String name, LocalDate beginDate, LocalDate endDate) throws Exception {
+    public ObservableList getDailyStatisticsList(String site, String name, LocalDate beginDate, LocalDate endDate) {
         dailyStatisticsList = FXCollections.observableArrayList(
                 new DailyStatistics("01/12/2017", 50),
                 new DailyStatistics("02/12/2017",40),
@@ -81,7 +85,7 @@ public class RequestDB {
         return dailyStatisticsList;
     }
 
-    public int getDailyStatisticsTotal() throws Exception {
+    public int getDailyStatisticsTotal() {
         int totalPages = 0;
         for (DailyStatistics ds: dailyStatisticsList) {
             totalPages += ds.quantityProperty().intValue();
@@ -89,7 +93,7 @@ public class RequestDB {
         return totalPages;
     }
 
-    public XYChart.Series getDailyStatisticsChartData(String name) throws Exception {
+    public XYChart.Series getDailyStatisticsChartData(String name) {
         XYChart.Series series = new XYChart.Series();
         series.setName(name);
         for (DailyStatistics ds: dailyStatisticsList) {
@@ -98,12 +102,13 @@ public class RequestDB {
         return series;
     }
 
-    public ObservableList getSites() throws Exception {
+    public ObservableList getSites() {
         sites = FXCollections.observableArrayList(
                 "lenta.ru","rbc.ru","rambler.ru");
         return sites;
     }
-    public ObservableList getNames() throws Exception {
+
+    public ObservableList getNames() {
         names = FXCollections.observableArrayList(
                 "Путин","Медведев","Навальный");
         return names;

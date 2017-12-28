@@ -13,7 +13,7 @@ public class ControllerStart {
         this.connDB = connDB;
     }
 
-    public void pressStartButton() throws Exception {
+    public void pressStartButton() {
         new AuthorizationWindow(mainApp, connDB);
     }
 

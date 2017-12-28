@@ -56,29 +56,52 @@ public class ControllerUI implements Initializable {
         this.connDB = connDB;
     }
 
-    public void pressTotalStatisticsUpdateButton() throws Exception {
+    public void pressTotalStatisticsUpdateButton() {
         if (totalStatisticsSite.getValue() != null) {
             totalStatisticsTable.setItems(connDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
             totalStatisticsChart.setData(connDB.getTotalStatisticsChartData());
             totalStatisticsChart.setLabelLineLength(10);
             totalStatisticsChart.setLegendSide(Side.LEFT);
+        } else {
+            new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
+                    "Внимание!", "Необходимо выбрать сайт");
         }
     }
 
-    public void pressDailyStatisticsUpdateButton() throws Exception {
+    public void pressDailyStatisticsUpdateButton() {
         LocalDate beginDate = dailyStatisticsBeginDate.getValue();
         LocalDate endDate = dailyStatisticsEndDate.getValue();
-        if (!(dailyStatisticsSite.getValue() == null || dailyStatisticsName.getValue() == null ||
-                beginDate == null || endDate == null)) {
-            if (endDate.compareTo(beginDate) >= 0) {
-                dailyStatisticsTable.setItems(
-                        connDB.getDailyStatisticsList(
-                                dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
-                                beginDate, endDate));
-                dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
-                dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData(dailyStatisticsName.getValue()));
-                dailyStatisticsChart.setTitle("");
+        if (dailyStatisticsSite.getValue() != null) {
+            if (dailyStatisticsName.getValue() != null) {
+                if (beginDate != null) {
+                    if (endDate != null) {
+                        if (endDate.compareTo(beginDate) >= 0) {
+                            dailyStatisticsTable.setItems(
+                                    connDB.getDailyStatisticsList(
+                                            dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
+                                            beginDate, endDate));
+                            dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
+                            dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData(dailyStatisticsName.getValue()));
+                            dailyStatisticsChart.setTitle("");
+                        } else {
+                            new AlertHandler(Alert.AlertType.WARNING, "Не верно заполнены параметры",
+                                    "Внимание!", "Начальная дата должна быть раньше конечной");
+                        }
+                    } else {
+                        new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
+                                "Внимание!", "Необходимо выбрать конечную дату");
+                    }
+                } else {
+                    new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
+                            "Внимание!", "Необходимо выбрать начальную дату");
+                }
+            } else {
+                new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
+                        "Внимание!", "Необходимо выбрать имя");
             }
+        } else {
+            new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
+                    "Внимание!", "Необходимо выбрать сайт");
         }
     }
 
@@ -90,7 +113,7 @@ public class ControllerUI implements Initializable {
         dstColumnQuantity.setCellValueFactory(cellData -> cellData.getValue().quantityProperty());
     }
 
-    public void fillLists() throws Exception {
+    public void fillLists() {
         totalStatisticsSite.setItems(connDB.getSites());
         dailyStatisticsSite.setItems(connDB.getSites());
         dailyStatisticsName.setItems(connDB.getNames());
