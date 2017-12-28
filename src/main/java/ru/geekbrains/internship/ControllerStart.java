@@ -1,6 +1,7 @@
 package ru.geekbrains.internship;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextInputDialog;
 
 import java.util.Optional;
@@ -28,6 +29,10 @@ public class ControllerStart {
         dialog.setTitle("Параметры");
         dialog.setHeaderText("Введите URL сервера БД");
         dialog.setContentText("URL:");
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/hdtDialog.css").toExternalForm());
+        dialogPane.getStyleClass().add("hdtDialog");
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(url -> mainApp.setDBStringURL(url));
     }

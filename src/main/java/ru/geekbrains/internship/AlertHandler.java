@@ -1,6 +1,8 @@
 package ru.geekbrains.internship;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 
 public class AlertHandler {
 
@@ -19,6 +21,10 @@ public class AlertHandler {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/hdtDialog.css").toExternalForm());
+        dialogPane.getStyleClass().add("hdtDialog");
 
         alert.showAndWait();
     }
