@@ -45,7 +45,7 @@ public class RequestDB {
                 JsonObject siteJSON = (JsonObject) sitesArray.get(i);
                 String stringSiteID = siteJSON.get("SiteID").getAsString();
                 String stringSiteName = siteJSON.get("SiteName").getAsString();
-                System.out.println("SiteID = " + stringSiteID + " SiteName = " + stringSiteName);
+                //System.out.println("SiteID = " + stringSiteID + " SiteName = " + stringSiteName);
                 JsonArray personArray = (JsonArray) siteJSON.get("persons");
                 TotalStatisticsJSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
                 for (int j = 0; j < personArray.size(); j++) {

@@ -17,8 +17,8 @@ public class ControllerAuth {
         this.mainApp = mainApp;
     }
 
-    public void setDBApp(RequestDB connDB) {
-        this.requestDB = connDB;
+    public void setDBApp(RequestDB requestDB) {
+        this.requestDB = requestDB;
     }
 
     public void pressOkButton() {
