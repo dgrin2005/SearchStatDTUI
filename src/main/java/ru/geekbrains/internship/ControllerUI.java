@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 public class ControllerUI implements Initializable {
 
     private StartWindow mainApp;
-    private RequestDB connDB;
+    private RequestDB requestDB;
 
     @FXML
     private ChoiceBox<String> totalStatisticsSite;
@@ -53,13 +53,13 @@ public class ControllerUI implements Initializable {
     }
 
     public void setDBApp(RequestDB connDB) {
-        this.connDB = connDB;
+        this.requestDB = connDB;
     }
 
     public void pressTotalStatisticsUpdateButton() {
         if (totalStatisticsSite.getValue() != null) {
-            totalStatisticsTable.setItems(connDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
-            totalStatisticsChart.setData(connDB.getTotalStatisticsChartData());
+            totalStatisticsTable.setItems(requestDB.getTotalStatisticsList(totalStatisticsSite.getValue()));
+            totalStatisticsChart.setData(requestDB.getTotalStatisticsChartData());
             totalStatisticsChart.setLabelLineLength(10);
             totalStatisticsChart.setLegendSide(Side.LEFT);
         } else {
@@ -77,11 +77,11 @@ public class ControllerUI implements Initializable {
                     if (endDate != null) {
                         if (endDate.compareTo(beginDate) >= 0) {
                             dailyStatisticsTable.setItems(
-                                    connDB.getDailyStatisticsList(
+                                    requestDB.getDailyStatisticsList(
                                             dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
                                             beginDate, endDate));
-                            dailyStatisticsTotalQuantity.setText(Integer.toString(connDB.getDailyStatisticsTotal()));
-                            dailyStatisticsChart.getData().add(connDB.getDailyStatisticsChartData(dailyStatisticsName.getValue()));
+                            dailyStatisticsTotalQuantity.setText(Integer.toString(requestDB.getDailyStatisticsTotal()));
+                            dailyStatisticsChart.getData().add(requestDB.getDailyStatisticsChartData(dailyStatisticsName.getValue()));
                             dailyStatisticsChart.setTitle("");
                         } else {
                             new AlertHandler(Alert.AlertType.WARNING, "Не верно заполнены параметры",
@@ -114,9 +114,9 @@ public class ControllerUI implements Initializable {
     }
 
     public void fillLists() {
-        totalStatisticsSite.setItems(connDB.getSites());
-        dailyStatisticsSite.setItems(connDB.getSites());
-        dailyStatisticsName.setItems(connDB.getNames());
+        totalStatisticsSite.setItems(requestDB.getSites());
+        dailyStatisticsSite.setItems(requestDB.getSites());
+        dailyStatisticsName.setItems(requestDB.getNames());
     }
 
 }

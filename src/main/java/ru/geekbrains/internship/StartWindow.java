@@ -22,9 +22,9 @@ public class StartWindow extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        RequestDB connDB = new RequestDB();
+        RequestDB requestDB = new RequestDB();
         setStage(primaryStage);
-        paint(primaryStage, connDB);
+        paint(primaryStage, requestDB);
 
     }
 
@@ -32,13 +32,13 @@ public class StartWindow extends Application {
         launch(args);
     }
 
-    public void paint(Stage stage, RequestDB connDB) {
+    public void paint(Stage stage, RequestDB requestDB) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/startwin.fxml"));
             AnchorPane load = (AnchorPane) loader.load();
             ControllerStart controller = loader.getController();
             controller.setMainApp(this);
-            controller.setDBApp(connDB);
+            controller.setDBApp(requestDB);
             Scene scene = new Scene(load);
             stage.setScene(scene);
             stage.setResizable(false);
