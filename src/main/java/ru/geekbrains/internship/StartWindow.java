@@ -8,11 +8,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class StartWindow extends Application {
+public class StartWindow extends Application implements ConnectionDBConst  {
 
     private Stage stage;
     private ConnectionDB connDB;
     private RequestDB requestDB;
+    private String DBStringURL;
 
     public Stage getStage() {
         return stage;
@@ -38,8 +39,17 @@ public class StartWindow extends Application {
         this.requestDB = requestDB;
     }
 
+    public String getDBStringURL() {
+        return DBStringURL;
+    }
+
+    public void setDBStringURL(String DBStringURL) {
+        this.DBStringURL = DBStringURL;
+    }
+
     @Override
     public void start(Stage primaryStage){
+        DBStringURL = DBSTRINGURL;
         setStage(primaryStage);
         paint(primaryStage);
 

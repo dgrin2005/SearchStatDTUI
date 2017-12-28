@@ -9,18 +9,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ConnectionDB implements ConnectionDBConst {
+public class ConnectionDB {
 
     private HttpURLConnection dBCon;
 
-    public ConnectionDB() {
-        try {
-            URL dBUrl = new URL(DBSTRINGURL);
-            dBCon = (HttpURLConnection) dBUrl.openConnection();
-        } catch (Exception e) {
-            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка подключения к БД");
-            //e.printStackTrace();
-        }
+    public ConnectionDB(String DBStringURL) throws Exception {
+        URL dBUrl = new URL(DBStringURL);
+        dBCon = (HttpURLConnection) dBUrl.openConnection();
     }
 
     public String readDBResult() {
