@@ -22,7 +22,7 @@ public class RequestDB {
         return true;
     }
 
-    public ObservableList getTotalStatisticsList(ConnectionDB connectionDB, String site) {
+    public ObservableList getTotalStatisticsList(String DBStringURL, String site) {
 
         totalStatisticsList = FXCollections.observableArrayList();
 /*
@@ -33,7 +33,7 @@ public class RequestDB {
 
         // +++ тест чтения и репарсинга json
         try {
-            //ConnectionDB connectionDB = new ConnectionDB();
+            ConnectionDB connectionDB = new ConnectionDB(DBStringURL);
             String out = connectionDB.readDBResult();
 
             JsonParser parser = new JsonParser();
@@ -54,6 +54,9 @@ public class RequestDB {
                 }
             }
             connectionDB.closeConnectionDB();
+        } catch (IllegalStateException e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка в полученных данных");
+            //e.printStackTrace();
         } catch (Exception e) {
             new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка подключения к базе данных");
             //e.printStackTrace();
@@ -70,7 +73,7 @@ public class RequestDB {
         return pieChartData;
     }
 
-    public ObservableList getDailyStatisticsList(ConnectionDB connectionDB, String site, String name, LocalDate beginDate, LocalDate endDate) {
+    public ObservableList getDailyStatisticsList(String DBStringURL, String site, String name, LocalDate beginDate, LocalDate endDate) {
         dailyStatisticsList = FXCollections.observableArrayList();
         // +++ тестовые данные
         LocalDate d = beginDate;
@@ -79,6 +82,19 @@ public class RequestDB {
             d = d.plusDays(1);
         }
         // --- тестовые данные
+
+        try {
+            ConnectionDB connectionDB = new ConnectionDB(DBStringURL);
+
+
+            connectionDB.closeConnectionDB();
+        } catch (IllegalStateException e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка в полученных данных");
+            //e.printStackTrace();
+        } catch (Exception e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка подключения к базе данных");
+            //e.printStackTrace();
+        }
        return dailyStatisticsList;
     }
 
@@ -99,21 +115,47 @@ public class RequestDB {
         return series;
     }
 
-    public ObservableList getSites(ConnectionDB connectionDB) {
+    public ObservableList getSites(String DBStringURL) {
         sites = FXCollections.observableArrayList();
         // +++ тестовые данные
         sites.add("lenta.ru");
         sites.add("rbc.ru");
         sites.add("rambler.ru");
         // --- тестовые данные
+        try {
+            ConnectionDB connectionDB = new ConnectionDB(DBStringURL);
+
+
+            connectionDB.closeConnectionDB();
+        } catch (IllegalStateException e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка в полученных данных");
+            //e.printStackTrace();
+        } catch (Exception e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка подключения к базе данных");
+            //e.printStackTrace();
+        }
         return sites;
     }
 
-    public ObservableList getNames(ConnectionDB connectionDB) {
+    public ObservableList getNames(String DBStringURL) {
         names = FXCollections.observableArrayList();
+        // +++ тестовые данные
         names.add("Person #1");
         names.add("Person #2");
         names.add("Person #3");
+        // --- тестовые данные
+        try {
+            ConnectionDB connectionDB = new ConnectionDB(DBStringURL);
+
+
+            connectionDB.closeConnectionDB();
+        } catch (IllegalStateException e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка в полученных данных");
+            //e.printStackTrace();
+        } catch (Exception e) {
+            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка подключения к базе данных");
+            //e.printStackTrace();
+        }
         return names;
     }
 

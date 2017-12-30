@@ -16,7 +16,7 @@ public class ControllerStart {
 
     public void pressStartButton() {
         try {
-            mainApp.setConnDB(new ConnectionDB(mainApp.getDBStringURL()));
+            //mainApp.setConnDB(new ConnectionDB(mainApp.getDBStringURL()));
             mainApp.setRequestDB(new RequestDB());
             new AuthorizationWindow(mainApp);
         } catch (Exception e) {

@@ -11,7 +11,6 @@ import java.io.IOException;
 public class StartWindow extends Application implements ConnectionDBConst  {
 
     private Stage stage;
-    private ConnectionDB connDB;
     private RequestDB requestDB;
     private String DBStringURL;
 
@@ -21,14 +20,6 @@ public class StartWindow extends Application implements ConnectionDBConst  {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-    }
-
-    public ConnectionDB getConnDB() {
-        return connDB;
-    }
-
-    public void setConnDB(ConnectionDB connDB) {
-        this.connDB = connDB;
     }
 
     public RequestDB getRequestDB() {

@@ -53,7 +53,7 @@ public class ControllerUI implements Initializable {
 
     public void pressTotalStatisticsUpdateButton() {
         if (totalStatisticsSite.getValue() != null) {
-            totalStatisticsTable.setItems(mainApp.getRequestDB().getTotalStatisticsList(mainApp.getConnDB(), totalStatisticsSite.getValue()));
+            totalStatisticsTable.setItems(mainApp.getRequestDB().getTotalStatisticsList(mainApp.getDBStringURL(), totalStatisticsSite.getValue()));
             totalStatisticsChart.setData(mainApp.getRequestDB().getTotalStatisticsChartData());
             totalStatisticsChart.setLabelLineLength(10);
             totalStatisticsChart.setLegendSide(Side.LEFT);
@@ -72,7 +72,7 @@ public class ControllerUI implements Initializable {
                     if (endDate != null) {
                         if (endDate.compareTo(beginDate) >= 0) {
                             dailyStatisticsTable.setItems(
-                                    mainApp.getRequestDB().getDailyStatisticsList(mainApp.getConnDB(),
+                                    mainApp.getRequestDB().getDailyStatisticsList(mainApp.getDBStringURL(),
                                             dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
                                             beginDate, endDate));
                             dailyStatisticsTotalQuantity.setText(Integer.toString(mainApp.getRequestDB().getDailyStatisticsTotal()));
@@ -109,9 +109,9 @@ public class ControllerUI implements Initializable {
     }
 
     public void fillLists() {
-        totalStatisticsSite.setItems(mainApp.getRequestDB().getSites(mainApp.getConnDB()));
-        dailyStatisticsSite.setItems(mainApp.getRequestDB().getSites(mainApp.getConnDB()));
-        dailyStatisticsName.setItems(mainApp.getRequestDB().getNames(mainApp.getConnDB()));
+        totalStatisticsSite.setItems(mainApp.getRequestDB().getSites(mainApp.getDBStringURL()));
+        dailyStatisticsSite.setItems(mainApp.getRequestDB().getSites(mainApp.getDBStringURL()));
+        dailyStatisticsName.setItems(mainApp.getRequestDB().getNames(mainApp.getDBStringURL()));
     }
 
 }
