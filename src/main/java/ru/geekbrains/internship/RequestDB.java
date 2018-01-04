@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
@@ -28,7 +27,7 @@ public class RequestDB implements ConnectionDBConst{
             String getTotalStatistics = String.format(GETTOTALSTATISTICS + GETTOTALSTATISTICSPARAMS,
                     URLEncoder.encode(site, "UTF-8"));
             JSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
-            tsJSONReparsing.readJSON(DBStringURL + getTotalStatistics, totalStatisticsList);
+            tsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + getTotalStatistics, totalStatisticsList);
         } catch (UnsupportedEncodingException e) {
             new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
                     "Внимание!", "Ошибка формирования запроса");
@@ -52,7 +51,7 @@ public class RequestDB implements ConnectionDBConst{
             String getDailyStatistics = String.format(GETDAILYSTATISTICS + GETDAILYSTATISTICSPARAMS,
                     URLEncoder.encode(name, "UTF-8"), beginDate, endDate, URLEncoder.encode(site, "UTF-8"));
             JSONReparsing dsJSONReparsing = new DailyStatisticsJSONReparsing();
-            dsJSONReparsing.readJSON(DBStringURL + getDailyStatistics, dailyStatisticsList);
+            dsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + getDailyStatistics, dailyStatisticsList);
         } catch (UnsupportedEncodingException e) {
             new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
                     "Внимание!", "Ошибка формирования запроса");
@@ -81,14 +80,14 @@ public class RequestDB implements ConnectionDBConst{
     public ObservableList getSites(String DBStringURL) {
         sites = FXCollections.observableArrayList();
         JSONReparsing sitesJSONReparsing = new StringJSONReparsing();
-        sitesJSONReparsing.readJSON(DBStringURL + GETSITES, sites);
+        sitesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + GETSITES, sites);
         return sites;
     }
 
     public ObservableList getNames(String DBStringURL) {
         names = FXCollections.observableArrayList();
         JSONReparsing namesJSONReparsing = new StringJSONReparsing();
-        namesJSONReparsing.readJSON(DBStringURL + GETPERSONS, names);
+        namesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + GETPERSONS, names);
         return names;
     }
 

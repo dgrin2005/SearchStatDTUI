@@ -5,7 +5,6 @@ import javafx.geometry.Side;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -53,7 +52,7 @@ public class ControllerUI implements Initializable {
 
     public void pressTotalStatisticsUpdateButton() {
         if (totalStatisticsSite.getValue() != null) {
-            totalStatisticsTable.setItems(mainApp.getRequestDB().getTotalStatisticsList(mainApp.getDBStringURLAPI(),
+            totalStatisticsTable.setItems(mainApp.getRequestDB().getTotalStatisticsList(mainApp.getDBStringURL(),
                     totalStatisticsSite.getValue()));
             totalStatisticsChart.setData(mainApp.getRequestDB().getTotalStatisticsChartData());
             totalStatisticsChart.setLabelLineLength(10);
@@ -73,7 +72,7 @@ public class ControllerUI implements Initializable {
                     if (endDate != null) {
                         if (endDate.compareTo(beginDate) >= 0) {
                             dailyStatisticsTable.setItems(
-                                    mainApp.getRequestDB().getDailyStatisticsList(mainApp.getDBStringURLAPI(),
+                                    mainApp.getRequestDB().getDailyStatisticsList(mainApp.getDBStringURL(),
                                             dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
                                             beginDate, endDate));
                             dailyStatisticsTotalQuantity.setText(Integer.toString(mainApp.getRequestDB().getDailyStatisticsTotal()));
