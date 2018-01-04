@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ConnectionDB {
+class ConnectionDB {
 
     private HttpURLConnection dBCon;
 

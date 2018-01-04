@@ -13,8 +13,6 @@ public class RequestDB implements ConnectionDBConst{
 
     private ObservableList<TotalStatistics> totalStatisticsList;
     private ObservableList<DailyStatistics> dailyStatisticsList;
-    private ObservableList<String> sites;
-    private ObservableList<String> names;
 
     public boolean checkAuthorization(String login, String password) {
         return true;
@@ -39,8 +37,8 @@ public class RequestDB implements ConnectionDBConst{
     public ObservableList getTotalStatisticsChartData() {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (TotalStatistics ts: totalStatisticsList) {
-            pieChartData.add(new PieChart.Data(ts.nameProperty().getValue().toString(),ts.quantityProperty().intValue()));
-        }
+            pieChartData.add(new PieChart.Data(ts.nameProperty().getValue(),ts.quantityProperty().intValue()));
+    }
         return pieChartData;
     }
 
@@ -77,18 +75,25 @@ public class RequestDB implements ConnectionDBConst{
         return series;
     }
 
+    /*
     public ObservableList getSites(String DBStringURL) {
-        sites = FXCollections.observableArrayList();
+        ObservableList<String> sites = FXCollections.observableArrayList();
         JSONReparsing sitesJSONReparsing = new StringJSONReparsing();
         sitesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + GETSITES, sites);
         return sites;
     }
 
     public ObservableList getNames(String DBStringURL) {
-        names = FXCollections.observableArrayList();
+        ObservableList<String> names = FXCollections.observableArrayList();
         JSONReparsing namesJSONReparsing = new StringJSONReparsing();
         namesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + GETPERSONS, names);
         return names;
     }
-
+*/
+    public ObservableList getList(String DBStringURL, String getList) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        JSONReparsing sitesJSONReparsing = new StringJSONReparsing();
+        sitesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + getList, list);
+        return list;
+    }
 }

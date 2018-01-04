@@ -18,7 +18,7 @@ public class StartWindow extends Application implements ConnectionDBConst  {
         return stage;
     }
 
-    public void setStage(Stage stage) {
+    private void setStage(Stage stage) {
         this.stage = stage;
     }
 
@@ -53,7 +53,7 @@ public class StartWindow extends Application implements ConnectionDBConst  {
     public void paint(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/startwin.fxml"));
-            AnchorPane load = (AnchorPane) loader.load();
+            AnchorPane load = loader.load();
             ControllerStart controller = loader.getController();
             controller.setMainApp(this);
             Scene scene = new Scene(load);

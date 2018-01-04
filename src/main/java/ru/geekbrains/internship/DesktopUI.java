@@ -7,12 +7,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class DesktopUI{
+class DesktopUI{
 
     public DesktopUI(StartWindow mainApp) {
         try {
             FXMLLoader loader = new FXMLLoader(mainApp.getClass().getResource("/searchstat.fxml"));
-            AnchorPane load = (AnchorPane) loader.load();
+            AnchorPane load = loader.load();
             ControllerUI controller = loader.getController();
             controller.setMainApp(mainApp);
             controller.fillLists();

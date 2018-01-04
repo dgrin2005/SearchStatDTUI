@@ -1,5 +1,6 @@
 package ru.geekbrains.internship;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.*;
 import javafx.geometry.Side;
 import javafx.scene.chart.LineChart;
@@ -9,7 +10,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class ControllerUI implements Initializable {
+public class ControllerUI implements Initializable, ConnectionDBConst {
 
     private StartWindow mainApp;
 
@@ -109,9 +110,17 @@ public class ControllerUI implements Initializable {
     }
 
     public void fillLists() {
+
+        ObservableList<String> sites;
+        /*
         totalStatisticsSite.setItems(mainApp.getRequestDB().getSites(mainApp.getDBStringURL()));
         dailyStatisticsSite.setItems(mainApp.getRequestDB().getSites(mainApp.getDBStringURL()));
         dailyStatisticsName.setItems(mainApp.getRequestDB().getNames(mainApp.getDBStringURL()));
+        */
+        sites = mainApp.getRequestDB().getList(mainApp.getDBStringURL(), GETSITES);
+        totalStatisticsSite.setItems(sites);
+        dailyStatisticsSite.setItems(sites);
+        dailyStatisticsName.setItems(mainApp.getRequestDB().getList(mainApp.getDBStringURL(), GETPERSONS));
     }
 
 }

@@ -1,6 +1,6 @@
 package ru.geekbrains.internship;
 
-public interface ConnectionDBConst {
+interface ConnectionDBConst {
     String DBSTRINGURL = "http://searchstat.cf:8081";
     String DBSTRINGURLAPI = "/restapi/v1.0/servlet/?";
     String DBSTRINGURLREQUEST = "/request/?";
