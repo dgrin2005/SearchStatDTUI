@@ -2,17 +2,17 @@ package ru.geekbrains.internship;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.*;
-import javafx.geometry.Side;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ControllerUI implements Initializable, ConnectionDBConst {
 
     private StartWindow mainApp;
+    private Command getTotalStatisticsCommand;
+    private Command getDailylStatisticsCommand;
 
     @FXML
     private ChoiceBox<String> totalStatisticsSite;
@@ -49,56 +49,19 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
 
     public void setMainApp(StartWindow mainApp) {
         this.mainApp = mainApp;
+        getTotalStatisticsCommand = new GetTotalStatisticsCommand(this.mainApp, totalStatisticsSite,
+                totalStatisticsTable, totalStatisticsChart);
+        getDailylStatisticsCommand = new GetDailylStatisticsCommand(mainApp, dailyStatisticsSite,dailyStatisticsName, dailyStatisticsBeginDate,
+                dailyStatisticsEndDate, dailyStatisticsTable, dailyStatisticsTotalQuantity,
+                dailyStatisticsChart);
     }
 
     public void pressTotalStatisticsUpdateButton() {
-        if (totalStatisticsSite.getValue() != null) {
-            totalStatisticsTable.setItems(mainApp.getRequestDB().getTotalStatisticsList(mainApp.getDBStringURL(),
-                    totalStatisticsSite.getValue()));
-            totalStatisticsChart.setData(mainApp.getRequestDB().getTotalStatisticsChartData());
-            totalStatisticsChart.setLabelLineLength(10);
-            totalStatisticsChart.setLegendSide(Side.LEFT);
-        } else {
-            new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                    "Внимание!", "Необходимо выбрать сайт");
-        }
+        getTotalStatisticsCommand.execute();
     }
 
     public void pressDailyStatisticsUpdateButton() {
-        LocalDate beginDate = dailyStatisticsBeginDate.getValue();
-        LocalDate endDate = dailyStatisticsEndDate.getValue();
-        if (dailyStatisticsSite.getValue() != null) {
-            if (dailyStatisticsName.getValue() != null) {
-                if (beginDate != null) {
-                    if (endDate != null) {
-                        if (endDate.compareTo(beginDate) >= 0) {
-                            dailyStatisticsTable.setItems(
-                                    mainApp.getRequestDB().getDailyStatisticsList(mainApp.getDBStringURL(),
-                                            dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
-                                            beginDate, endDate));
-                            dailyStatisticsTotalQuantity.setText(Integer.toString(mainApp.getRequestDB().getDailyStatisticsTotal()));
-                            dailyStatisticsChart.getData().add(mainApp.getRequestDB().getDailyStatisticsChartData(dailyStatisticsName.getValue()));
-                            dailyStatisticsChart.setTitle("");
-                        } else {
-                            new AlertHandler(Alert.AlertType.WARNING, "Не верно заполнены параметры",
-                                    "Внимание!", "Начальная дата должна быть раньше конечной");
-                        }
-                    } else {
-                        new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                                "Внимание!", "Необходимо выбрать конечную дату");
-                    }
-                } else {
-                    new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                            "Внимание!", "Необходимо выбрать начальную дату");
-                }
-            } else {
-                new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                        "Внимание!", "Необходимо выбрать имя");
-            }
-        } else {
-            new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                    "Внимание!", "Необходимо выбрать сайт");
-        }
+        getDailylStatisticsCommand.execute();
     }
 
     @Override
