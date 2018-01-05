@@ -18,12 +18,12 @@ class ConnectionDB {
     }
 
     public String readDBResult() {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(dBCon.getInputStream()));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                out += inputLine;
+                out.append(inputLine);
             }
             in.close();
         } catch (IOException e) {
@@ -31,7 +31,7 @@ class ConnectionDB {
                     "Ошибка", "Внимание!", "Ошибка чтения данных из БД");
             //e.printStackTrace();
         }
-        return out;
+        return out.toString();
     }
 
     public void closeConnectionDB() {

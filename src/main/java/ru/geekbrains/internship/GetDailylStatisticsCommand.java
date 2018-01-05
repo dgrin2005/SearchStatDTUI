@@ -6,14 +6,14 @@ import javafx.scene.control.*;
 import java.time.LocalDate;
 
 public class GetDailylStatisticsCommand implements Command {
-    private StartWindow mainApp;
-    private ChoiceBox<String> dailyStatisticsSite;
-    private ChoiceBox<String> dailyStatisticsName;
-    private DatePicker dailyStatisticsBeginDate;
-    private DatePicker dailyStatisticsEndDate;
-    private TableView<DailyStatistics> dailyStatisticsTable;
-    private TextField dailyStatisticsTotalQuantity;
-    private LineChart<String, Number> dailyStatisticsChart;
+    private final StartWindow mainApp;
+    private final ChoiceBox<String> dailyStatisticsSite;
+    private final ChoiceBox<String> dailyStatisticsName;
+    private final DatePicker dailyStatisticsBeginDate;
+    private final DatePicker dailyStatisticsEndDate;
+    private final TableView<DailyStatistics> dailyStatisticsTable;
+    private final TextField dailyStatisticsTotalQuantity;
+    private final LineChart<String, Number> dailyStatisticsChart;
 
     public GetDailylStatisticsCommand(StartWindow mainApp, ChoiceBox<String> dailyStatisticsSite,
                                       ChoiceBox<String> dailyStatisticsName, DatePicker dailyStatisticsBeginDate,

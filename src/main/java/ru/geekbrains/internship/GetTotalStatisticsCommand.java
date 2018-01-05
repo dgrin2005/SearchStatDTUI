@@ -7,10 +7,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
 
 public class GetTotalStatisticsCommand implements Command {
-    private StartWindow mainApp;
-    private ChoiceBox<String> totalStatisticsSite;
-    private TableView<TotalStatistics> totalStatisticsTable;
-    private PieChart totalStatisticsChart;
+    private final StartWindow mainApp;
+    private final ChoiceBox<String> totalStatisticsSite;
+    private final TableView<TotalStatistics> totalStatisticsTable;
+    private final PieChart totalStatisticsChart;
 
     public GetTotalStatisticsCommand(StartWindow mainApp, ChoiceBox<String> totalStatisticsSite, TableView<TotalStatistics> totalStatisticsTable, PieChart totalStatisticsChart) {
         this.mainApp = mainApp;

@@ -15,7 +15,6 @@ class DesktopUI{
             AnchorPane load = loader.load();
             ControllerUI controller = loader.getController();
             controller.setMainApp(mainApp);
-            controller.fillLists();
             Stage stage = mainApp.getStage();
             stage.setTitle("SearchStat");
             Scene scene = new Scene(load);

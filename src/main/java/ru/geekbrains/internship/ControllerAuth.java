@@ -5,7 +5,6 @@ import javafx.scene.control.TextField;
 
 public class ControllerAuth {
 
-    private StartWindow mainApp;
     private Command passAuthorizationCommand;
     private Command cancelAuthorizationCommand;
     private Command restorePasswordCommand;
@@ -16,9 +15,8 @@ public class ControllerAuth {
     private TextField password;
 
     public void setMainApp(StartWindow mainApp) {
-        this.mainApp = mainApp;
-        passAuthorizationCommand = new PassAuthorizationCommand(this.mainApp, login, password);
-        cancelAuthorizationCommand = new CancelAuthorizationCommand(this.mainApp);
+        passAuthorizationCommand = new PassAuthorizationCommand(mainApp, login, password);
+        cancelAuthorizationCommand = new CancelAuthorizationCommand(mainApp);
         restorePasswordCommand = new RestorePasswordCommand();
     }
 

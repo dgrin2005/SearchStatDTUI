@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class SettingsCommand implements Command {
 
-    private StartWindow mainApp;
+    private final StartWindow mainApp;
 
     public SettingsCommand(StartWindow mainApp) {
         this.mainApp = mainApp;
@@ -24,6 +24,6 @@ public class SettingsCommand implements Command {
                 getClass().getResource("/hdtDialog.css").toExternalForm());
         dialogPane.getStyleClass().add("hdtDialog");
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(url -> mainApp.setDBStringURL(url));
+        result.ifPresent(mainApp::setDBStringURL);
     }
 }

@@ -4,9 +4,9 @@ import javafx.scene.control.TextField;
 
 public class PassAuthorizationCommand implements Command {
 
-    private StartWindow mainApp;
-    private TextField login;
-    private TextField password;
+    private final StartWindow mainApp;
+    private final TextField login;
+    private final TextField password;
 
     public PassAuthorizationCommand(StartWindow mainApp, TextField login, TextField password) {
         this.mainApp = mainApp;

@@ -1,5 +1,5 @@
 package ru.geekbrains.internship;
 
-public interface Command {
-    public void execute();
+interface Command {
+    void execute();
 }

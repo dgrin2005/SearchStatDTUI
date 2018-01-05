@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 public class ControllerUI implements Initializable, ConnectionDBConst {
 
-    private StartWindow mainApp;
     private Command getTotalStatisticsCommand;
     private Command getDailylStatisticsCommand;
 
@@ -48,12 +47,12 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
     private LineChart<String, Number> dailyStatisticsChart;
 
     public void setMainApp(StartWindow mainApp) {
-        this.mainApp = mainApp;
-        getTotalStatisticsCommand = new GetTotalStatisticsCommand(this.mainApp, totalStatisticsSite,
+        getTotalStatisticsCommand = new GetTotalStatisticsCommand(mainApp, totalStatisticsSite,
                 totalStatisticsTable, totalStatisticsChart);
         getDailylStatisticsCommand = new GetDailylStatisticsCommand(mainApp, dailyStatisticsSite,dailyStatisticsName, dailyStatisticsBeginDate,
                 dailyStatisticsEndDate, dailyStatisticsTable, dailyStatisticsTotalQuantity,
                 dailyStatisticsChart);
+        fillLists(mainApp);
     }
 
     public void pressTotalStatisticsUpdateButton() {
@@ -72,8 +71,7 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
         dstColumnQuantity.setCellValueFactory(cellData -> cellData.getValue().quantityProperty());
     }
 
-    public void fillLists() {
-
+    private void fillLists(StartWindow mainApp) {
         ObservableList<String> sites;
         /*
         totalStatisticsSite.setItems(mainApp.getRequestDB().getSites(mainApp.getDBStringURL()));

@@ -2,7 +2,7 @@ package ru.geekbrains.internship;
 
 public class CancelAuthorizationCommand implements Command {
 
-    private StartWindow mainApp;
+    private final StartWindow mainApp;
 
     public CancelAuthorizationCommand(StartWindow mainApp) {
         this.mainApp = mainApp;

@@ -4,7 +4,7 @@ import javafx.scene.control.Alert;
 
 public class StartApplicationCommand implements Command {
 
-    private StartWindow mainApp;
+    private final StartWindow mainApp;
 
     public StartApplicationCommand(StartWindow mainApp) {
         this.mainApp = mainApp;
