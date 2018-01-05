@@ -10,7 +10,7 @@ import java.io.IOException;
 
 class AuthorizationWindow {
 
-    public AuthorizationWindow(StartWindow mainApp) {
+    AuthorizationWindow(StartWindow mainApp) {
         try {
             FXMLLoader loader = new FXMLLoader(mainApp.getClass().getResource("/authwin.fxml"));
             AnchorPane load = loader.load();

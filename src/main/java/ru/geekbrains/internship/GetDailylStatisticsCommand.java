@@ -15,7 +15,7 @@ public class GetDailylStatisticsCommand implements Command {
     private final TextField dailyStatisticsTotalQuantity;
     private final LineChart<String, Number> dailyStatisticsChart;
 
-    public GetDailylStatisticsCommand(StartWindow mainApp, ChoiceBox<String> dailyStatisticsSite,
+    GetDailylStatisticsCommand(StartWindow mainApp, ChoiceBox<String> dailyStatisticsSite,
                                       ChoiceBox<String> dailyStatisticsName, DatePicker dailyStatisticsBeginDate,
                                       DatePicker dailyStatisticsEndDate, TableView<DailyStatistics> dailyStatisticsTable,
                                       TextField dailyStatisticsTotalQuantity, LineChart<String, Number> dailyStatisticsChart) {

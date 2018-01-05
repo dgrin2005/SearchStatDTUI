@@ -12,7 +12,8 @@ public class GetTotalStatisticsCommand implements Command {
     private final TableView<TotalStatistics> totalStatisticsTable;
     private final PieChart totalStatisticsChart;
 
-    public GetTotalStatisticsCommand(StartWindow mainApp, ChoiceBox<String> totalStatisticsSite, TableView<TotalStatistics> totalStatisticsTable, PieChart totalStatisticsChart) {
+    GetTotalStatisticsCommand(StartWindow mainApp, ChoiceBox<String> totalStatisticsSite,
+                              TableView<TotalStatistics> totalStatisticsTable, PieChart totalStatisticsChart) {
         this.mainApp = mainApp;
         this.totalStatisticsSite = totalStatisticsSite;
         this.totalStatisticsTable = totalStatisticsTable;

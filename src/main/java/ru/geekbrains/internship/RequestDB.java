@@ -75,21 +75,6 @@ public class RequestDB implements ConnectionDBConst{
         return series;
     }
 
-    /*
-    public ObservableList getSites(String DBStringURL) {
-        ObservableList<String> sites = FXCollections.observableArrayList();
-        JSONReparsing sitesJSONReparsing = new StringJSONReparsing();
-        sitesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + GETSITES, sites);
-        return sites;
-    }
-
-    public ObservableList getNames(String DBStringURL) {
-        ObservableList<String> names = FXCollections.observableArrayList();
-        JSONReparsing namesJSONReparsing = new StringJSONReparsing();
-        namesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + GETPERSONS, names);
-        return names;
-    }
-*/
     public ObservableList getList(String DBStringURL, String getList) {
         ObservableList<String> list = FXCollections.observableArrayList();
         JSONReparsing sitesJSONReparsing = new StringJSONReparsing();

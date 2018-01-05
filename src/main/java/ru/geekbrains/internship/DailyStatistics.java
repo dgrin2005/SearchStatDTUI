@@ -9,7 +9,7 @@ public class DailyStatistics implements Statistics {
     private final StringProperty date;
     private final IntegerProperty quantity;
 
-    public DailyStatistics(String date, int quantity) {
+    DailyStatistics(String date, int quantity) {
         this.date = new SimpleStringProperty(date);
         this.quantity = new SimpleIntegerProperty(quantity);
     }

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 class DesktopUI{
 
-    public DesktopUI(StartWindow mainApp) {
+    DesktopUI(StartWindow mainApp) {
         try {
             FXMLLoader loader = new FXMLLoader(mainApp.getClass().getResource("/searchstat.fxml"));
             AnchorPane load = loader.load();

@@ -8,7 +8,7 @@ public class PassAuthorizationCommand implements Command {
     private final TextField login;
     private final TextField password;
 
-    public PassAuthorizationCommand(StartWindow mainApp, TextField login, TextField password) {
+    PassAuthorizationCommand(StartWindow mainApp, TextField login, TextField password) {
         this.mainApp = mainApp;
         this.login = login;
         this.password = password;

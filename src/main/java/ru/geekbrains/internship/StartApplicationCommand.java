@@ -6,7 +6,7 @@ public class StartApplicationCommand implements Command {
 
     private final StartWindow mainApp;
 
-    public StartApplicationCommand(StartWindow mainApp) {
+    StartApplicationCommand(StartWindow mainApp) {
         this.mainApp = mainApp;
     }
 

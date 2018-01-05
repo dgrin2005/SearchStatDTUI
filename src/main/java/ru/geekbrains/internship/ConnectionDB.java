@@ -12,7 +12,7 @@ class ConnectionDB {
 
     private HttpURLConnection dBCon;
 
-    public ConnectionDB(String DBStringURL) throws Exception {
+    ConnectionDB(String DBStringURL) throws Exception {
         URL dBUrl = new URL(DBStringURL);
         dBCon = (HttpURLConnection) dBUrl.openConnection();
     }

@@ -4,7 +4,7 @@ public class CancelAuthorizationCommand implements Command {
 
     private final StartWindow mainApp;
 
-    public CancelAuthorizationCommand(StartWindow mainApp) {
+    CancelAuthorizationCommand(StartWindow mainApp) {
         this.mainApp = mainApp;
     }
 
