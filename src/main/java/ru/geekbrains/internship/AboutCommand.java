@@ -1,15 +1,15 @@
 package ru.geekbrains.internship;
 
-public class CancelAuthorizationCommand implements Command {
+public class ExitToOSCommand implements Command {
 
     private final StartWindow mainApp;
 
-    CancelAuthorizationCommand(StartWindow mainApp) {
+    ExitToOSCommand(StartWindow mainApp) {
         this.mainApp = mainApp;
     }
 
     @Override
     public void execute() {
-        mainApp.paint(mainApp.getStage());
+        System.exit(0);
     }
 }
