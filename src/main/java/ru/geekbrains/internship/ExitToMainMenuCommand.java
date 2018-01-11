@@ -1,10 +1,10 @@
 package ru.geekbrains.internship;
 
-public class ExitToMenuCommand implements Command {
+public class ExitToMainMenuCommand implements Command {
 
     private final StartWindow mainApp;
 
-    ExitToMenuCommand(StartWindow mainApp) {
+    ExitToMainMenuCommand(StartWindow mainApp) {
         this.mainApp = mainApp;
     }
 

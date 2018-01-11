@@ -1,15 +1,18 @@
 package ru.geekbrains.internship;
 
-public class ExitToOSCommand implements Command {
+import javafx.scene.control.Alert;
+
+public class AboutCommand implements Command {
 
     private final StartWindow mainApp;
 
-    ExitToOSCommand(StartWindow mainApp) {
+    AboutCommand(StartWindow mainApp) {
         this.mainApp = mainApp;
     }
 
     @Override
     public void execute() {
-        System.exit(0);
+        new AlertHandler(Alert.AlertType.INFORMATION, "О программе", "SearchStat",
+                '\u00A9' + " 2018 HardDevTeam");
     }
 }
