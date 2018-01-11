@@ -37,34 +37,22 @@ public class GetDailylStatisticsCommand implements Command {
             if (dailyStatisticsName.getValue() != null) {
                 if (beginDate != null) {
                     if (endDate != null) {
-                        if (endDate.compareTo(beginDate) >= 0) {
-                            dailyStatisticsTable.setItems(
-                                    mainApp.getRequestDB().getDailyStatisticsList(mainApp.getDBStringURL(),
-                                            dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
-                                            beginDate, endDate));
-                            dailyStatisticsTotalQuantity.setText(Integer.toString(mainApp.getRequestDB().getDailyStatisticsTotal()));
-                            dailyStatisticsChart.getData().clear();
-                            dailyStatisticsChart.getData().add(mainApp.getRequestDB().getDailyStatisticsChartData(dailyStatisticsName.getValue()));
-                            dailyStatisticsChart.setTitle("");
-                        } else {
+                        if (endDate.compareTo(beginDate) < 0) {
+                            mainApp.getRequestDB().clearDailyStatisticsList();
                             new AlertHandler(Alert.AlertType.WARNING, "Не верно заполнены параметры",
                                     "Внимание!", "Начальная дата должна быть раньше конечной");
                         }
-                    } else {
-                        new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                                "Внимание!", "Необходимо выбрать конечную дату");
+                        dailyStatisticsTable.setItems(
+                                mainApp.getRequestDB().getDailyStatisticsList(mainApp.getDBStringURL(),
+                                        dailyStatisticsSite.getValue(), dailyStatisticsName.getValue(),
+                                        beginDate, endDate));
+                        dailyStatisticsTotalQuantity.setText(Integer.toString(mainApp.getRequestDB().getDailyStatisticsTotal()));
+                        dailyStatisticsChart.getData().clear();
+                        dailyStatisticsChart.getData().add(mainApp.getRequestDB().getDailyStatisticsChartData(dailyStatisticsName.getValue()));
+                        dailyStatisticsChart.setTitle("");
                     }
-                } else {
-                    new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                            "Внимание!", "Необходимо выбрать начальную дату");
                 }
-            } else {
-                new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                        "Внимание!", "Необходимо выбрать имя");
             }
-        } else {
-            new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                    "Внимание!", "Необходимо выбрать сайт");
         }
     }
 }

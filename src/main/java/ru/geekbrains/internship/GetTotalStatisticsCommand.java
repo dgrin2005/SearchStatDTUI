@@ -28,9 +28,6 @@ public class GetTotalStatisticsCommand implements Command {
             totalStatisticsChart.setData(mainApp.getRequestDB().getTotalStatisticsChartData());
             totalStatisticsChart.setLabelLineLength(10);
             totalStatisticsChart.setLegendSide(Side.LEFT);
-        } else {
-            new AlertHandler(Alert.AlertType.WARNING, "Не заполнен параметр",
-                    "Внимание!", "Необходимо выбрать сайт");
         }
     }
 }

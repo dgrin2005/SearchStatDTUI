@@ -66,6 +66,12 @@ public class RequestDB implements ConnectionDBConst{
         return dailyStatisticsList;
     }
 
+    public ObservableList clearDailyStatisticsList() {
+        dailyStatisticsList = FXCollections.observableArrayList();
+        dailyStatisticsList.clear();
+        return dailyStatisticsList;
+    }
+
     public int getDailyStatisticsTotal() {
         int totalPages = 0;
         for (DailyStatistics ds: dailyStatisticsList) {

@@ -24,6 +24,7 @@ public class FakeData implements ConnectionDBConst{
         totalStatisticsList.add(new TotalStatistics("Медведев",4000));
         totalStatisticsList.add(new TotalStatistics("Навальный",3000));
     }
+
     public void getFakeDailyStatistics(ObservableList<DailyStatistics> dailyStatisticsList, LocalDate beginDate, LocalDate endDate) {
         LocalDate d = beginDate;
         while (!d.isAfter(endDate)) {

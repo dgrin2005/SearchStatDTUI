@@ -1,5 +1,7 @@
 package ru.geekbrains.internship;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.*;
 import javafx.scene.chart.LineChart;
@@ -16,8 +18,6 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
     @FXML
     private ChoiceBox<String> totalStatisticsSite;
     @FXML
-    private Button totalStatisticsUpdateButton;
-    @FXML
     private TableView<TotalStatistics> totalStatisticsTable;
     @FXML
     private TableColumn<TotalStatistics, String> tstColumnName;
@@ -31,8 +31,6 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
     private DatePicker dailyStatisticsBeginDate;
     @FXML
     private DatePicker dailyStatisticsEndDate;
-    @FXML
-    private Button dailyStatisticsUpdateButton;
     @FXML
     private TableView<DailyStatistics> dailyStatisticsTable;
     @FXML
@@ -53,13 +51,28 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
                 dailyStatisticsEndDate, dailyStatisticsTable, dailyStatisticsTotalQuantity,
                 dailyStatisticsChart);
         fillLists(mainApp);
+        totalStatisticsSite.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+                getTotalStatisticsCommand.execute();
+            }
+        });
+        dailyStatisticsSite.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+                getDailylStatisticsCommand.execute();
+            }
+        });
+        dailyStatisticsName.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+                getDailylStatisticsCommand.execute();
+            }
+        });
     }
 
-    public void pressTotalStatisticsUpdateButton() {
-        getTotalStatisticsCommand.execute();
+    public void onActionDailyStatisticsBeginDate() {
+        getDailylStatisticsCommand.execute();
     }
 
-    public void pressDailyStatisticsUpdateButton() {
+    public void onActionDailyStatisticsEndDate() {
         getDailylStatisticsCommand.execute();
     }
 
