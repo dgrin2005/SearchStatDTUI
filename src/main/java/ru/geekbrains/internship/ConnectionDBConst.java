@@ -10,4 +10,5 @@ interface ConnectionDBConst {
     String GETDAILYSTATISTICSPARAMS = "&person=%s&date1=%s&date2=%s&site=%s";
     String GETSITES = "request=sites";
     String GETPERSONS = "request=persons";
+    String FAKEDB = "fake";
 }

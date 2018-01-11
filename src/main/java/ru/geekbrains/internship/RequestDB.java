@@ -21,15 +21,19 @@ public class RequestDB implements ConnectionDBConst{
     public ObservableList getTotalStatisticsList(String DBStringURL, String site) {
 
         totalStatisticsList = FXCollections.observableArrayList();
-        try {
-            String getTotalStatistics = String.format(GETTOTALSTATISTICS + GETTOTALSTATISTICSPARAMS,
-                    URLEncoder.encode(site, "UTF-8"));
-            JSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
-            tsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + getTotalStatistics, totalStatisticsList);
-        } catch (UnsupportedEncodingException e) {
-            new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
-                    "Внимание!", "Ошибка формирования запроса");
-            //e.printStackTrace();
+        if (!DBStringURL.toUpperCase().equals(FAKEDB.toUpperCase())) {
+            try {
+                String getTotalStatistics = String.format(GETTOTALSTATISTICS + GETTOTALSTATISTICSPARAMS,
+                        URLEncoder.encode(site, "UTF-8"));
+                JSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
+                tsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + getTotalStatistics, totalStatisticsList);
+            } catch (UnsupportedEncodingException e) {
+                new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
+                        "Внимание!", "Ошибка формирования запроса");
+                //e.printStackTrace();
+            }
+        } else {
+            new FakeData().getFakeTotalStatistics(totalStatisticsList);
         }
         return totalStatisticsList;
     }
@@ -45,15 +49,19 @@ public class RequestDB implements ConnectionDBConst{
     public ObservableList getDailyStatisticsList(String DBStringURL,
                                                  String site, String name, LocalDate beginDate, LocalDate endDate) {
         dailyStatisticsList = FXCollections.observableArrayList();
-        try {
-            String getDailyStatistics = String.format(GETDAILYSTATISTICS + GETDAILYSTATISTICSPARAMS,
-                    URLEncoder.encode(name, "UTF-8"), beginDate, endDate, URLEncoder.encode(site, "UTF-8"));
-            JSONReparsing dsJSONReparsing = new DailyStatisticsJSONReparsing();
-            dsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + getDailyStatistics, dailyStatisticsList);
-        } catch (UnsupportedEncodingException e) {
-            new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
-                    "Внимание!", "Ошибка формирования запроса");
-            //e.printStackTrace();
+        if (!DBStringURL.toUpperCase().equals(FAKEDB.toUpperCase())) {
+            try {
+                String getDailyStatistics = String.format(GETDAILYSTATISTICS + GETDAILYSTATISTICSPARAMS,
+                        URLEncoder.encode(name, "UTF-8"), beginDate, endDate, URLEncoder.encode(site, "UTF-8"));
+                JSONReparsing dsJSONReparsing = new DailyStatisticsJSONReparsing();
+                dsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + getDailyStatistics, dailyStatisticsList);
+            } catch (UnsupportedEncodingException e) {
+                new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
+                        "Внимание!", "Ошибка формирования запроса");
+                //e.printStackTrace();
+            }
+        } else {
+            new FakeData().getFakeDailyStatistics(dailyStatisticsList, beginDate, endDate);
         }
         return dailyStatisticsList;
     }
@@ -77,8 +85,12 @@ public class RequestDB implements ConnectionDBConst{
 
     public ObservableList getList(String DBStringURL, String getList) {
         ObservableList<String> list = FXCollections.observableArrayList();
-        JSONReparsing sitesJSONReparsing = new StringJSONReparsing();
-        sitesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + getList, list);
+        if (!DBStringURL.toUpperCase().equals(FAKEDB.toUpperCase())) {
+            JSONReparsing sitesJSONReparsing = new StringJSONReparsing();
+            sitesJSONReparsing.readJSON(DBStringURL + DBSTRINGURLREQUEST + getList, list);
+        } else {
+            new FakeData().getFakeList(list, getList);
+        }
         return list;
     }
 }
