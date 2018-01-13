@@ -1,24 +1,23 @@
 package ru.geekbrains.internship;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class DailyStatistics implements Statistics {
-    private final StringProperty date;
-    private final IntegerProperty quantity;
+public class StringList implements Statistics {
+    private final StringProperty id;
+    private final StringProperty name;
 
-    DailyStatistics(String date, int quantity) {
-        this.date = new SimpleStringProperty(date);
-        this.quantity = new SimpleIntegerProperty(quantity);
+    StringList(String id, String name) {
+        this.id = new SimpleStringProperty(id);
+        this.name = new SimpleStringProperty(name);
     }
 
-    public StringProperty dateProperty() {
-        return date;
+    public StringProperty idProperty() {
+        return id;
     }
 
-    public IntegerProperty quantityProperty() {
-        return quantity;
+    public StringProperty nameProperty() {
+        return name;
     }
+
 }
