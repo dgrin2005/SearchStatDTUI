@@ -7,22 +7,13 @@ import com.google.gson.JsonPrimitive;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
-abstract class JSONReparsing<T> {
+class TokenReading {
 
-    public void readJSON(String stringURL, ObservableList<T> tList) {
+    public String readToken(String stringURL) {
+        String out = "";
         try {
             ConnectionDB connectionDB = new ConnectionDB(stringURL);
-            String out = connectionDB.readDBResult();
-            JsonParser parser = new JsonParser();
-            JsonArray jsonArray = (JsonArray) parser.parse(out);
-            for (int j = 0; j < jsonArray.size(); j++) {
-                if (jsonArray.get(j) instanceof JsonPrimitive) {
-                    tList.add((T)jsonArray.get(j).getAsString());
-                } else {
-                    JsonObject personJSON = (JsonObject) jsonArray.get(j);
-                    tList.add(readJSONObject(personJSON));
-                }
-            }
+            out = connectionDB.readDBResult();
             connectionDB.closeConnectionDB();
         } catch (IllegalStateException e) {
             new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
@@ -32,8 +23,9 @@ abstract class JSONReparsing<T> {
             new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
                     "Внимание!", "Ошибка подключения к базе данных");
             //e.printStackTrace();
+        } finally {
+            return out;
         }
     }
 
-    protected abstract T readJSONObject(JsonObject jsonObject);
 }
