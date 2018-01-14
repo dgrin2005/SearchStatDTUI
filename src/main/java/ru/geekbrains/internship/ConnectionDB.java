@@ -20,7 +20,7 @@ class ConnectionDB {
     public String readDBResult() {
         StringBuilder out = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(dBCon.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(dBCon.getInputStream(), "UTF-8"));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 out.append(inputLine);
