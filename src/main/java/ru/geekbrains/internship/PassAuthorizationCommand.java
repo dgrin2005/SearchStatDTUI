@@ -21,6 +21,7 @@ public class PassAuthorizationCommand implements Command {
         if (!token.isEmpty()) {
             token = token.substring(1, token.length() - 1);
             mainApp.setToken(token);
+            mainApp.setUserName(login.getText());
             new DesktopUI(mainApp);
         } else {
             new AlertHandler(Alert.AlertType.ERROR, "Ошибка",
