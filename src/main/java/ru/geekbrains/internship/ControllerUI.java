@@ -61,21 +61,9 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
         aboutCommand = new AboutCommand(mainApp);
         changePasswordCommand = new ChangePasswordCommand();
         fillLists(mainApp);
-        totalStatisticsSite.valueProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue ov, String t, String t1) {
-                getTotalStatisticsCommand.execute();
-            }
-        });
-        dailyStatisticsSite.valueProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue ov, String t, String t1) {
-                getDailylStatisticsCommand.execute();
-            }
-        });
-        dailyStatisticsName.valueProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue ov, String t, String t1) {
-                getDailylStatisticsCommand.execute();
-            }
-        });
+        totalStatisticsSite.valueProperty().addListener((ov, t, t1) -> getTotalStatisticsCommand.execute());
+        dailyStatisticsSite.valueProperty().addListener((ov, t, t1) -> getDailylStatisticsCommand.execute());
+        dailyStatisticsName.valueProperty().addListener((ov, t, t1) -> getDailylStatisticsCommand.execute());
     }
 
     public void onActionDailyStatisticsBeginDate() {
@@ -118,7 +106,7 @@ public class ControllerUI implements Initializable, ConnectionDBConst {
         dailyStatisticsSite.setItems(sites);
         dailyStatisticsName.setItems(mainApp.getRequestDB().getList(mainApp.getDBStringURL(),
                 ACTION_GET_PERSONS, mainApp.getToken()));
-        userName.setText(mainApp.getUserName());
+        userName.setText("Пользователь: " + mainApp.getUserName());
     }
 
 }

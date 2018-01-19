@@ -62,7 +62,12 @@ public class StartWindow extends Application implements ConnectionDBConst  {
         DBStringURL = DBSTRINGURL;
         setStage(primaryStage);
         stage.getIcons().add(new Image("/icon.png"));
-        paint(primaryStage);
+        try {
+            paint(primaryStage);
+        } catch (IOException e) {
+            new AlertHandler(Alert.AlertType.ERROR,
+                    "Ошибка", "Внимание!", "Ошибка ввода-вывода");
+        }
 
     }
 
@@ -70,21 +75,16 @@ public class StartWindow extends Application implements ConnectionDBConst  {
         launch(args);
     }
 
-    public void paint(Stage stage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/startwin.fxml"));
-            AnchorPane load = loader.load();
-            ControllerStart controller = loader.getController();
-            controller.setMainApp(this);
-            Scene scene = new Scene(load);
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle("SearchStat");
-            stage.show();
-        } catch (IOException e) {
-            new AlertHandler(Alert.AlertType.ERROR, "Ошибка", "Внимание!", "Ошибка ввода-вывода");
-            //e.printStackTrace();
-        }
+    public void paint(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/startwin.fxml"));
+        AnchorPane load = loader.load();
+        ControllerStart controller = loader.getController();
+        controller.setMainApp(this);
+        Scene scene = new Scene(load);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("SearchStat");
+        stage.show();
     }
 
 }

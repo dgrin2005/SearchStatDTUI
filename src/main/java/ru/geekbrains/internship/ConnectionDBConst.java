@@ -13,5 +13,6 @@ interface ConnectionDBConst {
     String ACTION_GET_PERSONS = "&action=get-persons";
     String ACTION_TOKEN = "token=%s";
     String FAKEDB = "demo";
+    String AUTH_FAILED = "{  \"error\": \"Authentication failed\"}";
 
 }
