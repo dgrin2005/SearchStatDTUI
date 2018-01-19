@@ -1,7 +1,7 @@
 # Десктопный интерфейс пользователя SearchStat
-* версия 3.0
+### версия 3.0
 
-Создано для проекта HardDevTeam SearchStat https://github.com/AlexAlizar/SearchStat/
+#### Создано для проекта HardDevTeam SearchStat https://github.com/AlexAlizar/SearchStat/
 (Сбор статистики популярности личностей на различных сайтах)
 
 ## Настройка параметров сервера базы данных
