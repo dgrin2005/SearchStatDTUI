@@ -39,7 +39,7 @@ public class RequestDB implements ConnectionDBConst{
         }
     }
 
-    public ObservableList getTotalStatisticsList(String DBStringURL, String site, String token) {
+    public ObservableList<TotalStatistics> getTotalStatisticsList(String DBStringURL, String site, String token) {
 
         totalStatisticsList = FXCollections.observableArrayList();
         if (!DBStringURL.toUpperCase().equals(FAKEDB.toUpperCase())) {
@@ -47,7 +47,7 @@ public class RequestDB implements ConnectionDBConst{
                 String getTotalStatistics = String.format(ACTION_GET_TOTALSTATISTICS + ACTION_GET_TOTALSTATISTICS_PARAMS,
                         URLEncoder.encode(site, "UTF-8"));
                 String actionToken = String.format(ACTION_TOKEN, URLEncoder.encode(token, "UTF-8"));
-                JSONReparsing tsJSONReparsing = new TotalStatisticsJSONReparsing();
+                JSONReparsing<TotalStatistics> tsJSONReparsing = new TotalStatisticsJSONReparsing();
                 tsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + actionToken + getTotalStatistics,
                         totalStatisticsList);
             } catch (UnsupportedEncodingException e) {
@@ -69,7 +69,7 @@ public class RequestDB implements ConnectionDBConst{
         return totalStatisticsList;
     }
 
-    public ObservableList getTotalStatisticsChartData() {
+    public ObservableList<PieChart.Data> getTotalStatisticsChartData() {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (TotalStatistics ts: totalStatisticsList) {
             pieChartData.add(new PieChart.Data(ts.nameProperty().getValue(),ts.quantityProperty().intValue()));
@@ -77,7 +77,7 @@ public class RequestDB implements ConnectionDBConst{
         return pieChartData;
     }
 
-    public ObservableList getDailyStatisticsList(String DBStringURL,
+    public ObservableList<DailyStatistics> getDailyStatisticsList(String DBStringURL,
                                                  String site, String name, LocalDate beginDate,
                                                  LocalDate endDate, String token) {
         dailyStatisticsList = FXCollections.observableArrayList();
@@ -86,7 +86,7 @@ public class RequestDB implements ConnectionDBConst{
                 String getDailyStatistics = String.format(ACTION_GET_DAILYSTATISTICS + ACTION_GET_GETDAILYSTATISTICS_PARAMS,
                         URLEncoder.encode(name, "UTF-8"), beginDate, endDate, URLEncoder.encode(site, "UTF-8"));
                 String actionToken = String.format(ACTION_TOKEN, URLEncoder.encode(token, "UTF-8"));
-                JSONReparsing dsJSONReparsing = new DailyStatisticsJSONReparsing();
+                JSONReparsing<DailyStatistics> dsJSONReparsing = new DailyStatisticsJSONReparsing();
                 dsJSONReparsing.readJSON(DBStringURL + DBSTRINGURLAPI + actionToken + getDailyStatistics,
                         dailyStatisticsList);
             } catch (UnsupportedEncodingException e) {
@@ -121,16 +121,16 @@ public class RequestDB implements ConnectionDBConst{
         return totalPages;
     }
 
-    public XYChart.Series getDailyStatisticsChartData(String name) {
-        XYChart.Series series = new XYChart.Series();
+    public XYChart.Series<String, Number> getDailyStatisticsChartData(String name) {
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName(name);
         for (DailyStatistics ds: dailyStatisticsList) {
-            series.getData().add(new XYChart.Data(ds.dateProperty().getValue(), ds.quantityProperty().intValue()));
+            series.getData().add(new XYChart.Data<>(ds.dateProperty().getValue(), ds.quantityProperty().intValue()));
         }
         return series;
     }
 
-    public ObservableList getList(String DBStringURL, String getList, String token) {
+    public ObservableList<String> getList(String DBStringURL, String getList, String token) {
         ObservableList<String> list = FXCollections.observableArrayList();
         ObservableList<StringList> stringList = FXCollections.observableArrayList();
         if (!DBStringURL.toUpperCase().equals(FAKEDB.toUpperCase())) {
