@@ -4,7 +4,6 @@ import ru.geekbrains.internship.commands.Command;
 import ru.geekbrains.internship.commands.ExitToOSCommand;
 import ru.geekbrains.internship.commands.SettingsCommand;
 import ru.geekbrains.internship.commands.StartApplicationCommand;
-import ru.geekbrains.internship.windows.StartWindow;
 
 public class ControllerStart {
 

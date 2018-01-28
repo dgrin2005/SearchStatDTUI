@@ -6,7 +6,6 @@ import ru.geekbrains.internship.commands.Command;
 import ru.geekbrains.internship.commands.ExitToMainMenuCommand;
 import ru.geekbrains.internship.commands.PassAuthorizationCommand;
 import ru.geekbrains.internship.commands.RestorePasswordCommand;
-import ru.geekbrains.internship.windows.StartWindow;
 
 public class ControllerAuth {
 

@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import ru.geekbrains.internship.windows.ControllerUI;
-import ru.geekbrains.internship.windows.StartWindow;
 
 import java.io.IOException;
 

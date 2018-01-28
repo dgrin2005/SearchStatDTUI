@@ -9,7 +9,6 @@ import ru.geekbrains.internship.commands.*;
 import ru.geekbrains.internship.db.ConnectionDBConst;
 import ru.geekbrains.internship.data.DailyStatistics;
 import ru.geekbrains.internship.data.TotalStatistics;
-import ru.geekbrains.internship.windows.StartWindow;
 
 import java.net.URL;
 import java.util.ResourceBundle;
